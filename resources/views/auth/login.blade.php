@@ -26,9 +26,9 @@
 
         <!-- Remember Me -->
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="ms-3">
+            <x-tertiary-button class="ms-3">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </x-tertiary-button>
         </div>
     </form>
 </x-guest-layout>

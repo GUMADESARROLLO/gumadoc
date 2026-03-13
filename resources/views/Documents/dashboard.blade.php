@@ -15,9 +15,9 @@
 
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <div class="row mb-4">
+                    <div class="mb-4">
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-9">
                                 <div class="input-group">
                                     <span class="input-group-text bg-body-secondary">
                                         <i data-feather="search"></i>
@@ -25,7 +25,7 @@
                                     <input type="text" class="form-control" placeholder="Buscar en Inventario">
                                 </div>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control input-fecha" name="dt_range">
                                     <span class="input-group-text bg-body-secondary">
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button class="btn btn-success px-4">
+                                <button class="btn btn-success w-100">
                                     Agregar
                                 </button>
                             </div>
@@ -44,17 +44,17 @@
                             <table class="table table-bordered table-hover table-striped" id="tbl_documentos">
                                 <thead class="table-secondary">
                                     <tr>
-                                        <th class="text-start border-bottom">Col 1</th>
-                                        <th class="text-start border-bottom">Col 2</th>
-                                        <th class="text-start border-bottom">Col 3</th>
-                                        <th class="text-start border-bottom">Col 4</th>
-                                        <th class="text-start border-bottom">Col 5</th>
-                                        <th class="text-start border-bottom">Col 6</th>
-                                        <th class="text-start border-bottom">Col 7</th>
-                                        <th class="text-start border-bottom">Col 8</th>
-                                        <th class="text-start border-bottom">Col 9</th>
-                                        <th class="text-start border-bottom">Col 10</th>
-                                        <th class="text-start border-bottom">Col 11</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 1</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 2</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 3</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 4</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 5</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 6</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 7</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 8</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 9</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 10</th>
+                                        <th class="text-start border-bottom">Columna Ejemplo 11</th>
                                         <th class="text-start border-bottom">Acción</th>
                                     </tr>
                                 </thead>

@@ -9,7 +9,7 @@ services:
       - "./:/app/gumadocs"
       - "./default.tmpl:/kool/default.tmpl"
     ports:
-      - "83:80"
+      - "8088:80"
     environment:
       - APP_NAME=gumadocs
       - PHP_FPM_LISTEN=/run/php-fpm.sock

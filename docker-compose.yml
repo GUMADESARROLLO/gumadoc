@@ -1,23 +1,24 @@
-version: '3.9'
-services:
-  postgres:
-    container_name: postgres-db
-    image: postgres:16.13
-    volumes:
-        - ./postgres-data:/var/lib/postgresql/data
-    ports:
-        - 5432:5432
-    environment:
-        - POSTGRES_DB=${DB_DATABASE}
-        - POSTGRES_USER=${DB_USERNAME}
-        - POSTGRES_PASSWORD=${DB_PASSWORD}    
+version: "3.7"
 
-  app:
-    build: .
-    ports:
-        - "8000:8000"
-    container_name: cn_gumadoc
+services:
+  gumadocs:
+    container_name: cn_gumadocs
+    image: kooldev/php:8.2-nginx-sqlsrv-prod
+    restart: always
     volumes:
-        - .:/app
+      - "./:/app/gumadocs"
+      - "./default.tmpl:/kool/default.tmpl"
+    ports:
+      - "83:80"
     environment:
-        - DATABASE_URL=postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE}
+      - APP_NAME=gumadocs
+      - PHP_FPM_LISTEN=/run/php-fpm.sock
+      - NGINX_LISTEN=80
+      - NGINX_ROOT=/app/gumadocs/public
+      - NGINX_INDEX=index.php
+      - NGINX_CLIENT_MAX_BODY_SIZE=25M
+      - NGINX_PHP_FPM=unix:/run/php-fpm.sock
+      - NGINX_FASTCGI_READ_TIMEOUT=60s
+      - NGINX_FASTCGI_BUFFERS=8 8k
+      - NGINX_FASTCGI_BUFFER_SIZE=16k
+

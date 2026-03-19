@@ -43,15 +43,22 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label class="form-label">Fecha De Expiracion</label>
                                             <input type="text" class="form-control" name="dt_range" />
                                         </div>  
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label class="form-label">UNIDAD DE NEGOCIO</label>
                                             <select class="form-select" name="uploadUnidadNegocio">
                                                 <option value="UMK" selected>UNIMARK S,A</option>    
                                                 <option value="GP">GUMA PHARMA</option>                                            
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">UNIDAD DE NEGOCIO</label>
+                                            <select class="form-select" name="Categoria">
+                                                <option value="LEGAL" selected>DEPARTAMENTO LEGAL</option>    
+                                                <option value="REGENCIA">DEPARTMENTO REGENCIA</option>                                            
                                             </select>
                                         </div>
                                     </div>

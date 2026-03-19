@@ -34,9 +34,9 @@
                                 </div>
                             </div>
                             <div class="col-1">
-                                <button class="btn btn-success w-100">
+                                <a href="{{ route('Detalles') }}" class="btn btn-success w-100">
                                     Agregar
-                                </button>
+                                </a>
                             </div>
                         </div>
 

@@ -3,14 +3,14 @@
 @endsection
 
 <x-app-layout>  
-    <div class="py-3 border">  
+    <div class="py-3">  
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card shadow">
                             <div class="card-header bg-success text-white">
-                                <h3 class="mb-0">La informacin del documento a cargar es la siguiente:</h3>
+                                <h3 class="mb-0">La informacion del documento a cargar es la siguiente:</h3>
                                 <p class="mb-0">Informacion del Articulo a cargar.</p>
                             </div>
                             <div class="card-body p-4">
@@ -65,8 +65,21 @@
 
                                     <div class="input-group mb-3">
                                         <!-- 🔥 IMPORTANTE -->
-                                        <input type="file" class="form-control" name="UploadMe" id="UploadMe" required />
-                                    </div>                            
+                                        
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="border-2 border-dashed rounded p-5 text-center"
+                                            style="border-color: #dee2e6; border-style: dashed;" id="dropArea">
+                                            <i class="bi bi-cloud-upload display-4 text-muted mb-3"></i>
+                                            <h5>Arrastre y suelte archivos aqu&iacute;</h5>
+                                            <p class="text-muted">o haga clic para buscar</p>
+                                            <input type="file" class="form-control mt-2" name="UploadMe" id="UploadMe"  />
+                                            <p class="small text-muted mt-3 mb-0">
+                                                Tamaño máximo del archivo: 25MB. Formatos permitidos: PDF, DOC, JPG, PNG
+                                            </p>
+                                        </div>
+                                        <div id="fileList" class="mt-3"></div>
+                                    </div>
 
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-success btn-lg">Guardar</button>
@@ -77,43 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="card shadow">
-                            <div class="card-header bg-primary text-white">
-                                <h3 class="mb-0">Cargar documentos</h3>
-                                <p class="mb-0">Esta seccion es para cargar documentos, como por ejemplo, contratos, facturas, etc.</p>
-                            </div>
-                            <div class="card-body p-4">
-                                    <!-- Drag & Drop Area -->
-                                    <div class="mb-4">
-                                        <div class="border-2 border-dashed rounded p-5 text-center"
-                                            style="border-color: #dee2e6; border-style: dashed;" id="dropArea">
-                                            <i class="bi bi-cloud-upload display-4 text-muted mb-3"></i>
-                                            <h5>Drag & drop files here</h5>
-                                            <p class="text-muted">or click to browse</p>
-                                            <input type="file" class="d-none" id="fileInput" multiple>
-                                            <button type="button" class="btn btn-outline-primary mt-2"
-                                                onclick="document.getElementById('fileInput').click()">
-                                                Browse Files
-                                            </button>
-                                            <p class="small text-muted mt-3 mb-0">
-                                                Maximum file size: 10MB. Allowed formats: PDF, DOC, JPG, PNG
-                                            </p>
-                                        </div>
-                                        <div id="fileList" class="mt-3"></div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between">
-                                        <button type="reset" class="btn btn-outline-secondary">Clear All</button>
-                                        <button type="submit" class="btn btn-primary">Upload Files</button>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
         </div>
             
     </div>

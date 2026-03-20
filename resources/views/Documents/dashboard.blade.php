@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-1">
                                 <a href="{{ route('Detalles') }}" class="btn btn-success w-100">
-                                    Agregar
+                                    CREAR
                                 </a>
                             </div>
                         </div>

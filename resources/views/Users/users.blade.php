@@ -42,46 +42,36 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped" id="tbl_users">
-                                <thead class="table-secondary">
-                                    <tr>
-                                        <th class="text-start border-bottom">NUM</th>
-                                        <th class="text-start border-bottom">USER NAME</th>
-                                        <th class="text-start border-bottom">EMAIL</th>
-                                        <th class="text-start border-bottom">UNIDAD NEGOCIO</th>
-                                        <th class="text-start border-bottom">DEPARTAMENTO</th>
-                                        <th class="text-start border-bottom"> - </th>
-                                    </tr>
+                        <div class="table-responsive scrollbar">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">USER NAME</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">UNIDAD NEGOCIO</th>
+                                    <th scope="col">DEPARTAMENTO</th>                                    
+                                    <th class="text-end" scope="col">Actions</th>
+                                </tr>
                                 </thead>
-
                                 <tbody>
                                     @foreach ($Users as $user)
-                                        <tr>
-                                            <td class="border-bottom">{{ $user->id }}</td>
-                                            <td class="border-bottom">{{ $user->name }}</td>
-                                            <td class="border-bottom">{{ $user->email }}</td>
-                                            <td class="border-bottom"> - </td>
-                                            <td class="border-bottom"> - </td>                                           
-
-                                            <td class="border-bottom">
-                                                <div class="d-flex justify-content-center">
-                                                    <a href="#" class="btn btn-primary" OnClick="Editar({{$user}})">
-                                                        EDITAR
-                                                    </a>
-                                                    <span class="mx-2">|</span>
-                                                    <a href="#" class="btn btn-danger" OnClick="Eliminar({{$user->id}})">
-                                                        ELIMINAR
-                                                    </a>
-                                                    
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td class="text-end">
+                                        <div>
+                                            <button class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" OnClick="Editar({{$user}})"><span class="text-500 fas fa-edit" ></span></button>
+                                            <button class="btn p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" OnClick="Eliminar({{$user->id}})"><span class="text-500 fas fa-trash-alt" ></span></button>
+                                        </div>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
-
                             </table>
                         </div>
+                        
 
                 </div>
             </div>

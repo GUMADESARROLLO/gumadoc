@@ -24,41 +24,40 @@
                         </div>
                     </a>
                     <ul class="nav collapse show" id="dashboard">
-                        <li class="nav-item"><a class="nav-link active" href="{{ route('Detalles')}}" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Agregar Documento</span>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('dashboard')}}" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Dashboard</span>
+                                </div>
+                            </a>
+                            <a class="nav-link dropdown-indicator" href="#documents" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="forms">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Documentos</span>
+                                </div>
+                            </a>
+                            <ul class="nav collapse false" id="documents">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('Detalles') }}" aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Nuevo</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('dashboard') }}" aria-expanded="false">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Lista</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                        </li>
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.list') }}" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Usuarios</span>
+                                </div>
                             </a>
                             <!-- more inner pages-->
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('users.list') }}" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Usuarios</span>
-                            </div>
-                            </a>
-                            <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../dashboard/crm.html" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span>
-                            </div>
-                            </a>
-                            <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../dashboard/e-commerce.html" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span>
-                            </div>
-                            </a>
-                            <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../dashboard/project-management.html" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span>
-                            </div>
-                            </a>
-                            <!-- more inner pages-->
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="../dashboard/saas.html" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span>
-                            </div>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
             </ul>

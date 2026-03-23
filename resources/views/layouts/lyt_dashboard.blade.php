@@ -45,41 +45,8 @@
     <link href="falcon/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <!-- CLASES PERSONALIZADAS GLOBALES -->
-        <style>
-            .daterangepicker td.active, .daterangepicker td.active:hover {
-                background-color: #e7551f;
-                border-color: transparent;
-                color: #fff;
-            }
-
-            .daterangepicker td.in-range {
-                background-color: #FCCCFC;
-            }
-            .daterangepicker {
-                background-color: #1F2937;
-                border: 1px solid #1F2937;
-            }
-            .daterangepicker .calendar-table {
-                border: 1px solid #1F2937;
-                background-color: #1F2937;
-            }
-            .daterangepicker.show-ranges.ltr .drp-calendar.left {
-                border-left: 1px solid #1F2937;
-            }
-            .daterangepicker .calendar-table table {
-                background-color: #1F2937;
-            }
-            .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
-                background-color: #1F2937;
-            }
-            .input-fecha {
-                height: 40px !important;
-            }
-            
-        </style>
-    
+    <!-- DataTables CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css">
     <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
       if (isRTL) {
@@ -155,10 +122,10 @@
     <script src="falcon/assets/js/theme.js"></script>
 
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
 
     @yield('scripts')
 

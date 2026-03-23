@@ -10,7 +10,7 @@
       <span class="toggle-line"></span>
     </span>
   </button>
-  <a class="navbar-brand me-1 me-sm-3" href="../index.html">
+  <a class="navbar-brand me-1 me-sm-3" href="{{ route('dashboard') }}">
     <div class="d-flex align-items-center">
       <img class="me-2" src="falcon/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" />
       <span class="font-sans-serif">gumadocs</span>

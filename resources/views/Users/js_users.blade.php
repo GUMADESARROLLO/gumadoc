@@ -1,5 +1,4 @@
 <script type="text/javascript">
-    feather.replace();
     $(document).ready( function () {
         $('#tbl_users').DataTable({
             "destroy" : true,

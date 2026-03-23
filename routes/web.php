@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Documents\DocumentosController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Documents\DocumentosController;
 
 Route::get('/', function () {
     return view('auth.login-v2');

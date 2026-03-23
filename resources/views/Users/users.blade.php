@@ -1,9 +1,9 @@
-@section('metodosjs')
+@extends('Layouts.lyt_dashboard')
+@section('scripts')
     @include('Users.js_users')
 @endsection
 
-<x-app-layout>
-   
+@section('content')   
     
    
     <div class="py-5">
@@ -29,23 +29,19 @@
                     </div>
                     @endif
                     <div class="mb-4">
-                        <div class="row">
-
-                            <div class="col-11">
-                                <div class="input-group">
-                                    <span class="input-group-text bg-body-secondary">
-                                        <i data-feather="search"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Busqueda . . .">
+                        <div class="row align-items-center">
+                            <div class="pagination d-none"></div>
+                                <div class="col">
+                                    <div class="input-group">                                    
+                                        <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
+                                        <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search for a page" aria-label="search" />
+                                    </div>                                
+                                </div>
+                                <div class="col-auto d-flex">
+                                    <button class="btn btn-sm btn-primary px-4 ms-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span>NUEVO</span></button>
                                 </div>
                             </div>
-                        
-                            <div class="col-1">
-                                
-                                <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">NUEVO</button>
-                            </div>
                         </div>
-
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped" id="tbl_users">
                                 <thead class="table-secondary">
@@ -153,4 +149,4 @@
         </div>
     </div>
 
-</x-app-layout>
+@endsection

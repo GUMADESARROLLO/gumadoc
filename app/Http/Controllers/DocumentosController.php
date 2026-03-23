@@ -11,7 +11,8 @@ class DocumentosController extends Controller
     
     public function Dashboard()
     {
-        return view('Documents.dashboard');
+        //return view('Documents.dashboard');
+        return view('Dashboard.Home');
     }
 
     public function Detalles()

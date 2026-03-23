@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>GUMADOCS | Digitalizacion de documentos</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('falcon/assets/img/favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('falcon/assets/img/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('falcon/assets/img/favicons/favicon-16x16.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('falcon/assets/img/favicons/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('falcon/assets/img/favicons/manifest.json') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('falcon/assets/img/favicons/mstile-150x150.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <script src="falcon/assets/js/config.js"></script>
+    <script src="falcon/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
+
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="falcon/vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="falcon/vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="falcon/vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    <link href="falcon/vendors/fullcalendar/main.min.css" rel="stylesheet">
+    <link href="falcon/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="falcon/vendors/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
+    <link href="falcon/assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
+    <link href="falcon/assets/css/theme.min.css" rel="stylesheet" id="style-default">
+    <link href="falcon/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
+    <link href="falcon/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <script>
+      var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+      if (isRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container" data-layout="container">
+    
+        @include('layouts.sidebar')
+        <div class="content">
+          @include('layouts.topbar')
+          
+            @yield('content')
+          
+          <footer class="footer">
+            <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2021 &copy; <a href="https://themewagon.com">Themewagon</a></p>
+              </div>
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">v3.4.0</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+        
+      </div>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+    
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="falcon/vendors/popper/popper.min.js"></script>
+    <script src="falcon/vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="falcon/vendors/anchorjs/anchor.min.js"></script>
+    <script src="falcon/vendors/is/is.min.js"></script>
+    <script src="falcon/vendors/chart/chart.min.js"></script>
+    <script src="falcon/vendors/leaflet/leaflet.js"></script>
+    <script src="falcon/vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script src="falcon/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+    <script src="falcon/vendors/countup/countUp.umd.js"></script>
+    <script src="falcon/vendors/echarts/echarts.min.js"></script>
+    <script src="falcon/vendors/fullcalendar/main.min.js"></script>
+    <script src="falcon/assets/js/flatpickr.js"></script>
+    <script src="falcon/vendors/dayjs/dayjs.min.js"></script>
+    <script src="falcon/vendors/fontawesome/all.min.js"></script>
+    <script src="falcon/vendors/lodash/lodash.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="falcon/vendors/list.js/list.min.js"></script>
+    <script src="falcon/assets/js/theme.js"></script>
+
+  </body>
+
+</html>

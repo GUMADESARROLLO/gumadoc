@@ -16,7 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [DocumentosController::class, 'Dashboard'])->name('dashboard');
-    Route::get('/Detalles', [DocumentosController::class, 'Detalles'])->name('Detalles');
+    Route::get('/new-doc', [DocumentosController::class, 'Detalles'])->name('new-doc');
+    Route::get('/list-doc', [DocumentosController::class, 'ListaDocumentos'])->name('list-doc');
+    Route::get('/deta-doc', [DocumentosController::class, 'Details'])->name('deta-doc');
 
     Route::post('/UploadNAS', [DocumentosController::class, 'UploadNAS'])->name('UploadNAS');
 });

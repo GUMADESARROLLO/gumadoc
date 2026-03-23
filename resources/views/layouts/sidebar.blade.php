@@ -35,13 +35,13 @@
                             </a>
                             <ul class="nav collapse false" id="documents">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('Detalles') }}" aria-expanded="false">
+                                    <a class="nav-link" href="{{ route('new-doc') }}" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Nuevo</span>
                                         </div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('dashboard') }}" aria-expanded="false">
+                                    <a class="nav-link" href="{{ route('list-doc') }}" aria-expanded="false">
                                         <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Lista</span>
                                         </div>
                                     </a>

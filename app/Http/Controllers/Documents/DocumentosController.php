@@ -18,7 +18,15 @@ class DocumentosController extends Controller
 
     public function Detalles()
     {
-        return view('Documents.details');
+        return view('Documents.new-doc');
+    }
+    public function ListaDocumentos()
+    {
+        return view('Documents.List');
+    }
+    public function Details()
+    {
+        return view('Documents.Details');
     }
     public function UploadNAS(Request $request)
     {

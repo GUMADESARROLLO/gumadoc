@@ -6,7 +6,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login-v2');
 });
 
 Route::middleware('auth')->group(function () {

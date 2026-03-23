@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Documents;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,7 @@ class DocumentosController extends Controller
 
     public function Detalles()
     {
-        return view('Documents.details');
+        return view('Documents.details-v2');
     }
     public function UploadNAS(Request $request)
     {

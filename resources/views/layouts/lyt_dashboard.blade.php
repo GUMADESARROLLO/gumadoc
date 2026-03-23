@@ -43,6 +43,43 @@
     <link href="falcon/assets/css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="falcon/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="falcon/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <!-- CLASES PERSONALIZADAS GLOBALES -->
+        <style>
+            .daterangepicker td.active, .daterangepicker td.active:hover {
+                background-color: #e7551f;
+                border-color: transparent;
+                color: #fff;
+            }
+
+            .daterangepicker td.in-range {
+                background-color: #FCCCFC;
+            }
+            .daterangepicker {
+                background-color: #1F2937;
+                border: 1px solid #1F2937;
+            }
+            .daterangepicker .calendar-table {
+                border: 1px solid #1F2937;
+                background-color: #1F2937;
+            }
+            .daterangepicker.show-ranges.ltr .drp-calendar.left {
+                border-left: 1px solid #1F2937;
+            }
+            .daterangepicker .calendar-table table {
+                background-color: #1F2937;
+            }
+            .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+                background-color: #1F2937;
+            }
+            .input-fecha {
+                height: 40px !important;
+            }
+            
+        </style>
+    
     <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
       if (isRTL) {
@@ -73,15 +110,15 @@
         <div class="content">
           @include('layouts.topbar')
           
-            @yield('content')
+          @yield('content')
           
           <footer class="footer">
             <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
               <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2021 &copy; <a href="https://themewagon.com">Themewagon</a></p>
+                <p class="mb-0 text-600">Desarrollado por Grupo GUMA <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2026 &copy; <a href="https://gumacorp.com">GumaCorp</a></p>
               </div>
               <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 text-600">v3.4.0</p>
+                <p class="mb-0 text-600">v{{ env('APP_VERSION', '0.0.0') }}</p>
               </div>
             </div>
           </footer>
@@ -116,6 +153,14 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="falcon/vendors/list.js/list.min.js"></script>
     <script src="falcon/assets/js/theme.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+    @yield('scripts')
 
   </body>
 

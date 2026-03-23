@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DocumentosController;
+use App\Http\Controllers\Documents\DocumentosController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 

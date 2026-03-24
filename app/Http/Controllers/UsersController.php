@@ -88,24 +88,28 @@ class UsersController extends Controller
 
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = Hash::make($request->password);    
-            
+            $user->password = Hash::make($request->password);   
             $user->save();
 
-            $usrDep = UserDepartamento::where('id_user', $id)->first();
+            $UND_NEGO = $request->unidad_negocio ?? null;
+            if ($UND_NEGO != 'N/D') {
+                $usrDep = UserDepartamento::where('id_user', $id)->first();
 
-            if (!$usrDep) {
-                $usrDep = new UserDepartamento();
-                $usrDep->id_user = $id;
-                $usrDep->id_und  = $request->unidad_negocio ?? null;
-                $usrDep->id_dept = $request->departamento ?? null;
-            }else {
-                $usrDep->id_und  = $request->unidad_negocio ?? $usrDep->id_und;
-                $usrDep->id_dept = $request->departamento ?? $usrDep->id_dept;
-                
+                if (!$usrDep) {
+                    $usrDep = new UserDepartamento();
+                    $usrDep->id_user = $id;
+                    $usrDep->id_und  = $request->unidad_negocio ?? null;
+                    $usrDep->id_dept = $request->departamento ?? null;
+                }else {
+                    $usrDep->id_und  = $request->unidad_negocio ?? $usrDep->id_und;
+                    $usrDep->id_dept = $request->departamento ?? $usrDep->id_dept;
+                    
+                }
+
+                $usrDep->save();
             }
 
-            $usrDep->save();
+            
             return redirect('Users')->with('success', 'El usuario se ha actualizado correctamente con ID: ' . $user->id);
         }
 

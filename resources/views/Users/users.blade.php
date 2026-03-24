@@ -115,7 +115,7 @@
 
                         <div class="col-md-6">
                             <label for="unidad_negocio" class="form-label">UNIDAD DE NEGOCIO</label>
-                            <select class="form-select" name="unidad_negocio" id="unidad_negocio" required>
+                            <select class="form-select" name="unidad_negocio" id="unidad_negocio">
                                 <option value="N/D" selected>N/D</option>
                                 @foreach ($UNID as $unid)
                                     <option value="{{ $unid->PREFIJO }}">{{ $unid->DESCRIPCION }}</option>
@@ -125,7 +125,7 @@
 
                         <div class="col-md-6">
                             <label for="departamento" class="form-label">DEPARTAMENTO</label>
-                            <select class="form-select" name="departamento" id="departamento" required>
+                            <select class="form-select" name="departamento" id="departamento" >
                                 
                             </select>
                         </div>

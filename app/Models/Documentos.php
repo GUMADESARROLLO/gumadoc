@@ -7,5 +7,10 @@ use Illuminate\Http\Request;
 class Documentos extends Model {
     protected $table = "documento";
     protected $primaryKey = "DOCUMENTO";
+
+    public function Archivos()
+    {
+        return $this->hasMany(Adjuntos::class, 'DOC_ID', 'DOCUMENTO');
+    }
     
 }

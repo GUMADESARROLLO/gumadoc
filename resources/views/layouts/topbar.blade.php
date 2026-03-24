@@ -12,7 +12,7 @@
   </button>
   <a class="navbar-brand me-1 me-sm-3" href="{{ route('dashboard') }}">
     <div class="d-flex align-items-center">
-      <img class="me-2" src="falcon/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" />
+      <img class="me-2" src="{{ asset('falcon/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" />
       <span class="font-sans-serif">gumadocs</span>
     </div>
   </a>
@@ -29,7 +29,7 @@
     <li class="nav-item dropdown">
       <a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="avatar avatar-xl">
-          <img class="rounded-circle" src="falcon/assets/img/team/3-thumb.png" alt="" />
+          <img class="rounded-circle" src="{{ asset('falcon/assets/img/team/3-thumb.png') }}" alt="" />
         </div>
       </a>
       <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">

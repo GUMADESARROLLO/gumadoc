@@ -34,11 +34,13 @@ class DocumentosController extends Controller
     }
     public function ListaDocumentos()
     {
-        return view('Documents.List');
+        $Documentos = Documentos::Where('ACTIVO', '!=', 'N')->get();
+        return view('Documents.List', compact('Documentos'));
     }
-    public function Details()
+    public function Details($DocID)
     {
-        return view('Documents.Details');
+        $Documento = Documentos::Where('DOCUMENTO', $DocID)->first();
+        return view('Documents.Details', compact('Documento'));
     }
     public function UploadNAS(Request $request)
     {
@@ -68,6 +70,8 @@ class DocumentosController extends Controller
         $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
         $FileNa = $request->file('UploadMe')->getClientOriginalName();         
         $PathSt = $Unidad . '/'. $Depart . '/' . time() . '-' . $file->getClientOriginalName();
+        $NameUS = Auth::user()->email;
+        $UserID = Auth::user()->id;
         
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
         
@@ -75,11 +79,14 @@ class DocumentosController extends Controller
             $Url = Storage::disk('s3')->url($PathSt);
 
             $Documentos = new Documentos();
-            $Documentos->TITULO         = $Titulo;
+            $Documentos->TITULO         = strtoupper($Titulo);
             $Documentos->DESCRIPCION    = $Descri;
             $Documentos->FECHA_VENCI    = date('Y-m-d', strtotime($Expira));
             $Documentos->UNIDAD_NEGOCIO = $Unidad;
             $Documentos->DEPARTAMENTO   = $Depart;
+            $Documentos->ACTIVO         = 'S';
+            $Documentos->created_by     = $NameUS;
+            $Documentos->user_id        = $UserID;
             $Documentos->save();
 
             $DocID = $Documentos->DOCUMENTO;
@@ -89,6 +96,8 @@ class DocumentosController extends Controller
             $Adjunto->STORAGE_PATH   = $PathSt;
             $Adjunto->DOCUMENT_TYPE  = $Extenc;
             $Adjunto->DOCUMENT_NAME  = $FileNa;
+            $Adjunto->created_by     = $NameUS;
+            $Adjunto->user_id        = $UserID;
             $Adjunto->save();
 
 

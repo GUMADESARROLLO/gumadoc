@@ -23,26 +23,28 @@
     <link rel="manifest" href="{{ asset('falcon/assets/img/favicons/manifest.json') }}">
     <meta name="msapplication-TileImage" content="{{ asset('falcon/assets/img/favicons/mstile-150x150.png') }}">
     <meta name="theme-color" content="#ffffff">
-    <script src="falcon/assets/js/config.js"></script>
-    <script src="falcon/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
+    <script src="{{ asset('falcon/assets/js/config.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/overlayscrollbars/OverlayScrollbars.min.js') }}"></script>
 
 
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
-    <link href="falcon/vendors/leaflet/leaflet.css" rel="stylesheet">
-    <link href="falcon/vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
-    <link href="falcon/vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
-    <link href="falcon/vendors/fullcalendar/main.min.css" rel="stylesheet">
-    <link href="falcon/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link href="{{ asset('falcon/vendors/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('falcon/vendors/leaflet.markercluster/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ asset('falcon/vendors/leaflet.markercluster/MarkerCluster.Default.css') }}" rel="stylesheet">
+    <link href="{{ asset('falcon/vendors/fullcalendar/main.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('falcon/vendors/flatpickr/flatpickr.min.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
-    <link href="falcon/vendors/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
-    <link href="falcon/assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
-    <link href="falcon/assets/css/theme.min.css" rel="stylesheet" id="style-default">
-    <link href="falcon/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
-    <link href="falcon/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="{{ asset('falcon/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('falcon/assets/css/theme-rtl.min.css') }}" rel="stylesheet" id="style-rtl">
+    <link href="{{ asset('falcon/assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
+    <link href="{{ asset('falcon/assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
+    <link href="{{ asset('falcon/assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
+    
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- DataTables CSS-->
@@ -102,30 +104,32 @@
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-    <script src="falcon/vendors/popper/popper.min.js"></script>
-    <script src="falcon/vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="falcon/vendors/anchorjs/anchor.min.js"></script>
-    <script src="falcon/vendors/is/is.min.js"></script>
-    <script src="falcon/vendors/chart/chart.min.js"></script>
-    <script src="falcon/vendors/leaflet/leaflet.js"></script>
-    <script src="falcon/vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
-    <script src="falcon/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
-    <script src="falcon/vendors/countup/countUp.umd.js"></script>
-    <script src="falcon/vendors/echarts/echarts.min.js"></script>
-    <script src="falcon/vendors/fullcalendar/main.min.js"></script>
-    <script src="falcon/assets/js/flatpickr.js"></script>
-    <script src="falcon/vendors/dayjs/dayjs.min.js"></script>
-    <script src="falcon/vendors/fontawesome/all.min.js"></script>
-    <script src="falcon/vendors/lodash/lodash.min.js"></script>
+    <script src="{{ asset('falcon/vendors/popper/popper.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/anchorjs/anchor.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/is/is.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/chart/chart.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/leaflet.markercluster/leaflet.markercluster.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/countup/countUp.umd.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/fullcalendar/main.min.js') }}"></script>
+    <script src="{{ asset('falcon/assets/js/flatpickr.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/dayjs/dayjs.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/fontawesome/all.min.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/lodash/lodash.min.js') }}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="falcon/vendors/list.js/list.min.js"></script>
-    <script src="falcon/assets/js/theme.js"></script>
+    <script src="{{ asset('falcon/vendors/list.js/list.min.js ') }}"></script>
+    <script src="{{ asset('falcon/assets/js/theme.js') }}"></script>
+    <script src="{{ asset('falcon/vendors/dropzone/dropzone.min.js') }}"></script>
 
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
     @yield('scripts')
 

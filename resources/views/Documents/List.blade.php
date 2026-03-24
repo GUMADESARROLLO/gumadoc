@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody class="list">
-                            @for ($i = 0; $i < 17; $i++)
+                            @foreach ($Documentos as $d)
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center position-relative">
@@ -30,26 +30,25 @@
                                             <img class="img-fluid" src="{{ asset('falcon/assets/img/icons/docs.png') }}" alt="" />
                                         </div>
                                         <div class="flex-1 ms-3">
-                                            <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="{{ route('deta-doc') }}">Lorem ium dolor sit amet</a></h6>
-                                            <p class="text-500 fs--2 mb-0">N0. 001</p>
+                                            <h6 class="mb-0 fw-semi-bold"><a class="stretched-link text-900" href="../deta-doc/{{ $d->DOCUMENTO }}"> {{ strtoupper($d->TITULO) }}</a></h6>
+                                            <p class="text-500 fs--2 mb-0">N0. {{ $d->DOCUMENTO }}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle text-center">UNIMARK S,A.</td>
-                                <td class="align-middle text-center">DEPT. LEGAL</td>
+                                <td class="align-middle text-center"> {{ $d->UNIDAD_NEGOCIO }}</td>
+                                <td class="align-middle text-center"> {{ $d->DEPARTAMENTO }}</td>
                                 <td class="align-middle text-center date">
-                                    <p class="fs--1 mb-0 fw-semi-bold">01/02/22</p>
+                                    <p class="fs--1 mb-0 fw-semi-bold"> {{ $d->created_at }}</p>
                                 </td>
                                 <td class="align-middle text-center ">
                                     <div class="row">
-                                       
                                         <button class="btn btn-light border-300 btn-sm text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Documentos">
                                             <img src="falcon/assets/img/icons/folder-solid.svg" alt="" width="15" />
                                         </button>
                                     </div>
                                 </td>
                             </tr>   
-                            @endfor            
+                            @endforeach            
                         </tbody>
                     </table>
                 </div>

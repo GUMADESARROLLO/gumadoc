@@ -48,6 +48,8 @@ class DocumentosController extends Controller
         
         $file   = $request->file('UploadMe');
         $Unidad = $request->input('uploadUnidadNegocio');
+
+        
         
         $name = $Unidad . '/' . time() . '-' . $file->getClientOriginalName();
         $Minio = Storage::disk('s3')->put($name, file_get_contents($file), 'public');

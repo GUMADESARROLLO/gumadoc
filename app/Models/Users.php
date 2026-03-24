@@ -11,6 +11,12 @@ class Users extends Model {
     protected $primaryKey = "id";
 
 
+    public function departamentos()
+    {
+        return $this->hasOne(UserDepartamento::class, 'id_user', 'id');
+    }
+
+
     public static function getUsuers(Request $request) {
         return Users::where('activo', '!=', 'N')->get();
     }

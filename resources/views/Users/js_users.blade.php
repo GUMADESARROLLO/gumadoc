@@ -21,13 +21,94 @@
         $(".dt-search").hide();
     } );
 
+
+    var currentUserDepartamento = [];
+
+    $("#unidad_negocio").on('change', function(){
+        var unidad_negocio = $("#unidad_negocio").val();
+        $.ajax({
+            url: "{{ route('getDepartamento') }}",
+            method: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                unidad_negocio: unidad_negocio
+            },
+            success: function(response) {
+                var html = '';
+
+                $.each(response, function(index, item) {
+                    var selected = currentUserDepartamento.includes(item.ID_DEPARTAMENTO) ? ' selected' : '';
+                    html += '<option value="'+item.ID_DEPARTAMENTO+'"'+selected+'>'+item.DESCRIPCION+'</option>';
+                });
+
+                $('#departamento').html(html);
+            }
+        });
+    });
+
+    function openUserModal() {
+        FormClean();
+        var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        myModal.show();
+    }
+
     function Editar(User) {
 
-        console.log(User);
-        
-    }
-    function Eliminar(UserID) {
+        if (!User || !User.id) {
+            console.error('Usuario inválido para editar', User);
+            return;
+        }
 
-        console.log(UserID);        
+        FormClean();
+
+        $('#staticBackdropLabel').text('Editar Usuario # ' + User.id);
+        $('#user_id').val(User.id);
+        $('#name').val(User.name || '');
+        $('#email').val(User.email || '');
+
+        $('#password').val('');
+        $('#password_confirmation').val('');
+        $('#password').prop('required', false);
+        $('#password_confirmation').prop('required', false);
+
+        $('#form_users').attr('action', '/UserUpdate/' + User.id);
+        $('#form_method').val('PUT');
+
+        var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        myModal.show();
+    }
+
+    function Eliminar(UserID) {
+        if (!UserID) {
+            return;
+        }
+
+        if (!confirm('¿Desea eliminar el usuario con ID ' + UserID + '?')) {
+            return;
+        }
+
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/UserDelete/' + UserID
+        });
+
+        form.append($('<input>', { type: 'hidden', name: '_token', value: '{{ csrf_token() }}' }));
+        form.append($('<input>', { type: 'hidden', name: '_method', value: 'DELETE' }));
+        $('body').append(form);
+        form.submit();
+    }
+
+    function FormClean() {
+        //$('#form_users')[0].reset();
+        $('#name').val('');
+        $('#email').val('');
+        $('#user_id').val('');
+        $('#staticBackdropLabel').text('Nuevo Usuario');
+        $('#form_users').attr('action', '{{ route('users.store') }}');
+        $('#form_method').val('POST');
+        $('#password').prop('required', true);
+        $('#password_confirmation').prop('required', true);
+        $('#unidad_negocio').val('N/D').trigger('change');
+        $('#departamento').html('<option value="">Departamento</option>');
     }
 </script>

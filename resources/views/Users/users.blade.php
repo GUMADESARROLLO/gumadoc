@@ -38,7 +38,7 @@
                                     </div>                                
                                 </div>
                                 <div class="col-auto d-flex">
-                                    <button class="btn btn-sm btn-primary px-4 ms-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span>NUEVO</span></button>
+                                    <button class="btn btn-sm btn-primary px-4 ms-2" type="button" onclick="FormClean()" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span>NUEVO</span></button>
                                 </div>
                             </div>
                         </div>
@@ -46,8 +46,9 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th scope="col">ID</th>
                                     <th scope="col">USER NAME</th>
-                                    <th scope="col">Email</th>
+                                    <th scope="col">EMAIL</th>
                                     <th scope="col">UNIDAD NEGOCIO</th>
                                     <th scope="col">DEPARTAMENTO</th>                                    
                                     <th class="text-end" scope="col">Actions</th>
@@ -55,15 +56,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($Users as $user)
+                                   
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->id }}</td>
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->departamentos->unidadNegocio->DESCRIPCION ?? ' - ' }}</td>
+                                        <td>{{ $user->departamentos->Departamento->DESCRIPCION ?? ' - ' }}</td>
                                         <td class="text-end">
                                         <div>
-                                            <button class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" OnClick="Editar({{$user}})"><span class="text-500 fas fa-edit" ></span></button>
-                                            <button class="btn p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" OnClick="Eliminar({{$user->id}})"><span class="text-500 fas fa-trash-alt" ></span></button>
+                                            <button class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" onclick='Editar(@json($user))'><span class="text-500 fas fa-edit" ></span></button>
+                                            <button class="btn p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" onclick="Eliminar({{$user->id}})"><span class="text-500 fas fa-trash-alt" ></span></button>
                                         </div>
                                         </td>
                                     </tr>
@@ -88,7 +91,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">               
-                    <form action="{{ route('users.store') }}" method="POST" class="row g-3" name="form_users">
+                    <form action="{{ route('users.store') }}" method="POST" class="row g-3" name="form_users" id="form_users">
                         @csrf
                         <div class="col-md-6">
                             <label for="name" class="form-label">NOMBRE COMPLETO</label>
@@ -113,18 +116,17 @@
                         <div class="col-md-6">
                             <label for="unidad_negocio" class="form-label">UNIDAD DE NEGOCIO</label>
                             <select class="form-select" name="unidad_negocio" id="unidad_negocio" required>
-                                <option value="" selected>N/D</option>
-                                <option value="UMK">UNIMARK S,A</option>
-                                <option value="GP">GUMA PHARMA</option>
+                                <option value="N/D" selected>N/D</option>
+                                @foreach ($UNID as $unid)
+                                    <option value="{{ $unid->PREFIJO }}">{{ $unid->DESCRIPCION }}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-6">
                             <label for="departamento" class="form-label">DEPARTAMENTO</label>
                             <select class="form-select" name="departamento" id="departamento" required>
-                                <option value="" selected>N/D</option>
-                                <option value="LEGAL">DEPARTAMENTO LEGAL</option>
-                                <option value="REGENCIA">DEPARTMENTO REGENCIA</option>
+                                
                             </select>
                         </div>
 

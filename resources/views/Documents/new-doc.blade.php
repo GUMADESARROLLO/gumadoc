@@ -11,12 +11,7 @@
                 <h5 class="mb-0">La informacion del documento:</h5>
                 <p class="mb-0">Informacion del Articulo a cargar.</p>
             </div>
-            <div class="col-auto ms-auto">
-                <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                <button class="btn btn-sm active" data-bs-toggle="pill" data-bs-target="#dom-d4ebf6c5-74b4-4308-8c64-cda718c9b324" type="button" role="tab" aria-controls="dom-d4ebf6c5-74b4-4308-8c64-cda718c9b324" aria-selected="true" id="tab-dom-d4ebf6c5-74b4-4308-8c64-cda718c9b324">Preview</button>
-                <button class="btn btn-sm" data-bs-toggle="pill" data-bs-target="#dom-ed2c63c2-870e-4e8f-b431-d8a9ac67961a" type="button" role="tab" aria-controls="dom-ed2c63c2-870e-4e8f-b431-d8a9ac67961a" aria-selected="false" id="tab-dom-ed2c63c2-870e-4e8f-b431-d8a9ac67961a">Code</button>
-                </div>
-            </div>
+            
         </div>
     </div>
     <div class="card-body bg-light">
@@ -35,33 +30,28 @@
                         </div>
                     @endif
                 @endif
-                <form action="{{ route('UploadNAS') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('UploadNAS') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="basic-form-name">Titulo</label>
-                        <input class="form-control" id="basic-form-name" type="text" placeholder="Name" name="name" />                        
+                        <label class="form-label" for="basic-form-name">TITULO CORTO DEL DOCUMENTO</label>
+                        <input class="form-control" id="basic-form-name" type="text" placeholder="Titulo Corto" name="TituloDoc" />                        
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-form-textarea">Description</label>
-                        <textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="Description" name="descripcion"></textarea>
+                        <label class="form-label" for="basic-form-textarea">DESCRIPCION</label>
+                        <textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="Descripcion" name="descripcion"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-form-dob">Date of Birth</label>
+                        <label class="form-label" for="basic-form-dob">EXPIRACION</label>
                         <input type="text" class="form-control" name="dt_range" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-form-gender">UNIDAD DE NEGOCIO</label>
-                        <select class="form-select" name="uploadUnidadNegocio">
-                            <option value="UMK" selected>UNIMARK S,A</option>    
-                            <option value="GP">GUMA PHARMA</option>                                            
-                        </select>
+                        <input type="text" class="form-control" name="UnidadNegocio" value="{{$UnidadNegocio}}" readonly />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-form-gender">UNIDAD DE NEGOCIO</label>
-                        <select class="form-select" name="Categoria">
-                            <option value="LEGAL" selected>DEPARTAMENTO LEGAL</option>    
-                            <option value="REGENCIA">DEPARTMENTO REGENCIA</option>                                            
-                        </select>
+                        <label class="form-label" for="basic-form-gender">DEPARTAMENTO</label>
+                        <input type="text" class="form-control" name="Departamento" value="{{$Departamentos}}" readonly />
+                        
                     </div>
                     <div class="mb-4">
                         <div class="border-2 border-dashed rounded p-3 text-center"

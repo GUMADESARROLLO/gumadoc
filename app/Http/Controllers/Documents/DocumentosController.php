@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Documents;
 use App\Http\Controllers\Controller;
 
+use App\Models\Users;
+
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
+
+use App\Models\Documentos;
+use App\Models\Adjuntos;
 
 class DocumentosController extends Controller
 {
@@ -17,8 +23,14 @@ class DocumentosController extends Controller
     }
 
     public function Detalles()
-    {
-        return view('Documents.new-doc');
+    {        
+        $Auth = Auth::user();       
+
+        $UserLogin = Users::where('id', $Auth->id)->first();
+        $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
+        $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
+        
+        return view('Documents.new-doc', compact('UnidadNegocio', 'Departamentos'));
     }
     public function ListaDocumentos()
     {
@@ -47,15 +59,39 @@ class DocumentosController extends Controller
         }
         
         $file   = $request->file('UploadMe');
-        $Unidad = $request->input('uploadUnidadNegocio');
 
+        $Titulo = $request->input('TituloDoc');
+        $Descri = $request->input('descripcion');
+        $Expira = $request->input('dt_range');
+        $Unidad = $request->input('UnidadNegocio');
+        $Depart = $request->input('Departamento');
+        $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
+        $FileNa = $request->file('UploadMe')->getClientOriginalName();         
+        $PathSt = $Unidad . '/'. $Depart . '/' . time() . '-' . $file->getClientOriginalName();
         
-        
-        $name = $Unidad . '/' . time() . '-' . $file->getClientOriginalName();
-        $Minio = Storage::disk('s3')->put($name, file_get_contents($file), 'public');
+        $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
         
         if($Minio){
-            $Url = Storage::disk('s3')->url($name);
+            $Url = Storage::disk('s3')->url($PathSt);
+
+            $Documentos = new Documentos();
+            $Documentos->TITULO         = $Titulo;
+            $Documentos->DESCRIPCION    = $Descri;
+            $Documentos->FECHA_VENCI    = date('Y-m-d', strtotime($Expira));
+            $Documentos->UNIDAD_NEGOCIO = $Unidad;
+            $Documentos->DEPARTAMENTO   = $Depart;
+            $Documentos->save();
+
+            $DocID = $Documentos->DOCUMENTO;
+
+            $Adjunto = new Adjuntos();
+            $Adjunto->DOC_ID         = $DocID;
+            $Adjunto->STORAGE_PATH   = $PathSt;
+            $Adjunto->DOCUMENT_TYPE  = $Extenc;
+            $Adjunto->DOCUMENT_NAME  = $FileNa;
+            $Adjunto->save();
+
+
             return back()->with(['status' => 'ok', 'message' => 'Archivo subido correctamente', 'path' => $Url], 200)->header('Content-Type', 'application/json');
         }
         

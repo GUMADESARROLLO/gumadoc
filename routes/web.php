@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/UserUpdate/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/UserDelete/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     Route::post('/getDepartamento', [UsersController::class, 'getDepartamento'])->name('getDepartamento');
-    Route::get('/file-preview/{fileName}', [FilePreviewController::class, 'filePreview']);
+    Route::get('/filePreview/{fileName}', [FilePreviewController::class, 'filePreview'])->name('filePreview');
 
 });
 

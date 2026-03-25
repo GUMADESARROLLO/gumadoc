@@ -98,7 +98,7 @@
             <div class="row g-0 align-items-center border-bottom py-2 px-3">
                
                 <div class="col-md mt-1 mt-md-0">
-                    <code>{{ $Archivo->DOCUMENT_NAME }}</code>
+                    <a href="../filePreview/{{ $Archivo->ADJUNTO }}" target="_blank" class="text-danger"> <code> {{ $Archivo->DOCUMENT_NAME }}</code> </a>
                     <p class="fs--1 mb-0 text-600">{{ $Archivo->created_at }} - {{ $Archivo->created_by }}</p>
                 </div>
                 <div class="col-md-auto">

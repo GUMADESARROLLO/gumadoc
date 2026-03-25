@@ -48,6 +48,39 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- DataTables CSS-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css">
+    <!-- CLASES PERSONALIZADAS GLOBALES -->
+    <style>
+        .daterangepicker td.active, .daterangepicker td.active:hover {
+            background-color: #e7551f;
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .daterangepicker td.in-range {
+            background-color: #FCCCFC;
+        }
+        .daterangepicker {
+            background-color: #1F2937;
+            border: 1px solid #1F2937;
+        }
+        .daterangepicker .calendar-table {
+            border: 1px solid #1F2937;
+            background-color: #1F2937;
+        }
+        .daterangepicker.show-ranges.ltr .drp-calendar.left {
+            border-left: 1px solid #1F2937;
+        }
+        .daterangepicker .calendar-table table {
+            background-color: #1F2937;
+        }
+        .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+            background-color: #1F2937;
+        }
+        .input-fecha {
+            height: 40px !important;
+        }
+        
+    </style>
     <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
       if (isRTL) {

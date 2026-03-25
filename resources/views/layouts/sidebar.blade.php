@@ -74,7 +74,7 @@
                         
                     </ul>
                     <a class="nav-link" href="{{ route('users.list') }}" role="button" aria-expanded="false">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">Usuarios</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-users"></span></span><span class="nav-link-text ps-1">USUARIOS</span>
                         </div>
                     </a>
                 </li>

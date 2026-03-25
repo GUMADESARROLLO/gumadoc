@@ -28,9 +28,17 @@
 
     <li class="nav-item dropdown">
       <a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="avatar avatar-xl">
-          <img class="rounded-circle" src="{{ asset('falcon/assets/img/team/3-thumb.png') }}" alt="" />
+        <div class="d-flex align-items-center position-relative">
+          <div class="flex-1">
+            <h6 class="mb-0 fw-semi-bold"><div class="stretched-link text-900">{{AUTH::user()->name}}</div></h6>
+            <p class="text-500 fs--2 mb-0">{{AUTH::user()->email}}</p>
+          </div>
+          <div class="avatar avatar-xl ms-3">
+            <img class="rounded-circle" src="{{ asset('falcon/assets/img/team/avatar.png') }}"   />
+          </div>
         </div>
+
+        
       </a>
       <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
           <div class="bg-white dark__bg-1000 rounded-2 py-2">
@@ -39,7 +47,7 @@
             <a class="dropdown-item" href="{{ route('profile.edit') }}">Perfil</a>
             <a class="dropdown-item" href="{{ route('users.list') }}">Usuarios</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
+            
             <form method="POST" action="{{ route('logout') }}">
               @csrf
               <a class="dropdown-item" href="{{route('logout')}}"  onclick="event.preventDefault();

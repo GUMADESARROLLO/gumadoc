@@ -8,7 +8,7 @@
     <div class="card-header">
         <div class="row flex-between-end">
             <div class="col-auto align-self-center">
-                <h5 class="mb-0">La informacion del documento:</h5>
+                <h5 class="mb-0">Creacion del Documento:</h5>
                 <p class="mb-0">Informacion del Articulo a cargar.</p>
             </div>
             
@@ -32,39 +32,43 @@
                 @endif
                 <form action="{{ route('UploadNAS') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-form-name">TITULO CORTO DEL DOCUMENTO</label>
-                        <input class="form-control" id="basic-form-name" type="text" placeholder="Titulo Corto" name="TituloDoc" />                        
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-form-textarea">DESCRIPCION</label>
-                        <textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="Descripcion" name="descripcion"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-form-dob">EXPIRACION</label>
-                        <input type="text" class="form-control" name="dt_range" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-form-gender">UNIDAD DE NEGOCIO</label>
-                        <input type="text" class="form-control" name="UnidadNegocio" value="{{$UnidadNegocio}}" readonly />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-form-gender">DEPARTAMENTO</label>
-                        <input type="text" class="form-control" name="Departamento" value="{{$Departamentos}}" readonly />
-                        
-                    </div>
-                    <div class="mb-4">
-                        <div class="border-2 border-dashed rounded p-3 text-center"
-                            style="border-color: #dee2e6; border-style: dashed;" id="dropArea">
-                            <i class="bi bi-cloud-upload display-4 text-muted mb-3"></i>
-                            <h5>Arrastre y suelte archivos aqu&iacute;</h5>
-                            <p class="text-muted">o haga clic para buscar</p>
-                            <input type="file" class="form-control mt-2" name="UploadMe" id="UploadMe"  />
-                            <p class="small text-muted mt-3 mb-0">
-                                Tamaño máximo del archivo: 25MB. Formatos permitidos: PDF, DOC, JPG, PNG
-                            </p>
+                    <div class="row">                    
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="basic-form-name">TITULO CORTO DEL DOCUMENTO</label>
+                            <input class="form-control" id="basic-form-name" type="text" placeholder="TITULO CORTO" name="TituloDoc" />                        
                         </div>
-                        <div id="fileList" class="mt-3"></div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="basic-form-dob">EXPIRACION</label>
+                            <input type="text" class="form-control" name="dt_range" />
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="basic-form-gender">UNIDAD DE NEGOCIO</label>
+                            <input type="text" class="form-control" name="UnidadNegocio" value="{{$UnidadNegocio}}" readonly />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label" for="basic-form-gender">DEPARTAMENTO</label>
+                            <input type="text" class="form-control" name="Departamento" value="{{$Departamentos}}" readonly />                            
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-form-textarea">DESCRIPCION</label>
+                            <textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="DESCRIPCION" name="descripcion"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="border-2 border-dashed rounded p-3 text-center"
+                                style="border-color: #dee2e6; border-style: dashed;" id="dropArea">
+                                <i class="bi bi-cloud-upload display-4 text-muted mb-3"></i>
+                                <h5>Arrastre y suelte archivos aqu&iacute;</h5>
+                                <p class="text-muted">o haga clic para buscar</p>
+                                <input type="file" class="form-control mt-2" name="UploadMe" id="UploadMe"  />
+                                <p class="small text-muted mt-3 mb-0">
+                                    Tamaño máximo del archivo: 25MB. Formatos permitidos: PDF, DOC, JPG, PNG
+                                </p>
+                            </div>
+                            <div id="fileList" class="mt-3"></div>
+                        </div>
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success btn-lg">Guardar</button>

@@ -10,7 +10,7 @@
 
         </div><a class="navbar-brand" href="{{ route('dashboard') }}">
         <div class="d-flex align-items-center py-3">
-            <img class="me-2" src="{{ asset('img/guma.png') }}" alt="" width="150" />
+            <img class="me-2" src="{{ asset('img/logo_unimark.png') }}" alt="" width="150" />
         </div>
         </a>
     </div>

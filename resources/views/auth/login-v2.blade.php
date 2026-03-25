@@ -14,11 +14,9 @@
                 <div class="col-lg-9 col-xl-8 col-xxl-6">
                     
                     <a class="d-flex flex-center mb-4" href="#!">
-                        <img class="me-2" src="img/guma.png" alt="" width="250" />
+                        <img class="me-2" src="img/logo_unimark.png" alt="" width="300" />
                     </a>
                     <div class="card">
-                        
-                        
                         <div class="card-header bg-circle-shape bg-shape text-center p-2">
                             <a class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light" href="#!">GUMADOCS</a></div>
                             <div class="card-body p-4">

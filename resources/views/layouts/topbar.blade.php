@@ -12,7 +12,6 @@
   </button>
   <a class="navbar-brand me-1 me-sm-3" href="{{ route('dashboard') }}">
     <div class="d-flex align-items-center">
-      <img class="me-2" src="{{ asset('falcon/assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" />
       <span class="font-sans-serif">gumadocs</span>
     </div>
   </a>
@@ -29,9 +28,9 @@
     <li class="nav-item dropdown">
       <a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="d-flex align-items-center position-relative">
-          <div class="flex-1">
-            <h6 class="mb-0 fw-semi-bold"><div class="stretched-link text-900">{{AUTH::user()->name}}</div></h6>
-            <p class="text-500 fs--2 mb-0">{{AUTH::user()->email}}</p>
+          <div class="flex-1 text-end">
+            <h6 class="mb-0 fw-semi-bold"><div class="stretched-link text-900">{{session('user_name')}}</div></h6>
+            <p class="text-500 fs--2 mb-0">{{session('und_negci')}} / {{session('departame')}}</p>
           </div>
           <div class="avatar avatar-xl ms-3">
             <img class="rounded-circle" src="{{ asset('falcon/assets/img/team/avatar.png') }}"   />

@@ -50,6 +50,8 @@ class ProfileController extends Controller
 
         Auth::logout();
 
+        $request->session()->forget(['unidad_negocio', 'departamento']);
+
         $user->delete();
 
         $request->session()->invalidate();

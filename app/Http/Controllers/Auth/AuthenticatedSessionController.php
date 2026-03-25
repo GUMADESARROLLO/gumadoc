@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Users;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -27,6 +28,18 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $Auth = Auth::user();     
+
+        $UserLogin = Users::where('id', $Auth->id)->first();
+        $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
+        $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
+
+        session([
+            'user_name' => $Auth->name,
+            'und_negci' => $UnidadNegocio,
+            'departame' => $Departamentos
+        ]);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

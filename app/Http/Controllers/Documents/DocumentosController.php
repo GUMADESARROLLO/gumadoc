@@ -45,13 +45,13 @@ class DocumentosController extends Controller
     public function UploadNAS(Request $request)
     {
         $rules = [
-            'UploadMe' => 'required|file|mimes:zip,rar,pdf,doc,jpg,png|max:25600'
+            'UploadMe' => 'required|file|mimes:zip,rar,pdf,doc,jpg,png,rar,zip|max:157286400'
         ];
         
         $messages = [
             'UploadMe.required' => 'El archivo es requerido',
-            'UploadMe.max' => 'El archivo no puede ser mayor a 25MB',
-            'UploadMe.mimes' => 'El archivo debe ser de tipo PDF, DOC, JPG, PNG',
+            'UploadMe.max' => 'El archivo no puede ser mayor a 150MB',
+            'UploadMe.mimes' => 'El archivo debe ser de tipo PDF, DOC, JPG, PNG, ZIP, RAR',
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -113,13 +113,13 @@ class DocumentosController extends Controller
         
 
         $rules = [
-            'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:25600'
+            'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png,zip,rar|max:157286400',
         ];
 
         $messages = [
             'file.required' => 'El archivo es requerido',
-            'file.max' => 'El archivo no puede ser mayor a 25MB',
-            'file.mimes' => 'El archivo debe ser de tipo PDF, DOC, DOCX, JPG, JPEG, PNG',
+            'file.max' => 'El archivo no puede ser mayor a 150MB',
+            'file.mimes' => 'El archivo debe ser de tipo PDF, DOC, DOCX, JPG, JPEG, PNG, ZIP, RAR',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

@@ -16,8 +16,8 @@
             method: "POST",
             paramName: "file",
             maxFiles: 1,
-            maxFilesize: 25, // MB
-            acceptedFiles: ".jpg,.jpeg,.png,.pdf,.doc,.docx",
+            maxFilesize: 150, // MB
+            acceptedFiles: ".jpg,.jpeg,.png,.pdf,.doc,.docx,.rar,.zip",
             addRemoveLinks: true,
             dictDefaultMessage: "Arrastra y suelta archivos aquí o haz clic para seleccionar",
             dictRemoveFile: "Remover archivo",

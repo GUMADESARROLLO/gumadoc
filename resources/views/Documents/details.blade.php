@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-md-auto">
                     <p class="mb-0"> 
-                    <a href="../DownloadAttachment/{{ $Archivo->ADJUNTO }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                        <a href="../DownloadAttachment/{{ $Archivo->ADJUNTO }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">
                             <i class="bi bi-download"></i> Descargar
                         </a>
                         <a href="#!" onclick="DeleteAttachment(' {{ $Archivo->ADJUNTO }}')" class="btn btn-sm btn-outline-danger me-2">

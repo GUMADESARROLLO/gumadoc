@@ -15,10 +15,11 @@
                         <thead class="bg-light">
                             <tr class="text-800">
                                 <th class="sort" data-sort="projects">Documentos</th>
+                                <th class="sort" data-sort="projects">Adjuntos</th>
                                 <th class="sort text-center" data-sort="worked">Unidad Negocio</th>
                                 <th class="sort text-center" data-sort="time">Departamento</th>
                                 <th class="sort text-center" data-sort="date">Fecha Creacion</th>
-                                <th class="text-center">Adjuntos</th>
+                                <th class="text-center"> - </th>
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -35,17 +36,23 @@
                                         </div>
                                     </div>
                                 </td>
+                                
+                                <td class="align-middle text-center"> {{ count($d->Archivos)  }}</td>
                                 <td class="align-middle text-center"> {{ $d->UNIDAD_NEGOCIO }}</td>
                                 <td class="align-middle text-center"> {{ $d->DEPARTAMENTO }}</td>
                                 <td class="align-middle text-center date">
                                     <p class="fs--1 mb-0 fw-semi-bold"> {{ $d->created_at }}</p>
                                 </td>
                                 <td class="align-middle text-center ">
-                                    <div class="row">
-                                        <button class="btn btn-light border-300 btn-sm text-600 shadow-none" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Documentos">
-                                            <img src="falcon/assets/img/icons/folder-solid.svg" alt="" width="15" />
-                                        </button>
-                                    </div>
+                                    <p class="mb-0"> 
+                                        <a href="../deta-doc/{{ $d->DOCUMENTO }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                                            <i class="bi bi-download"></i> Actualizar  
+                                        </a>
+                                        <a href="#!" class="btn btn-sm btn-outline-danger me-2">
+                                            <i class="bi bi-download"></i> Remover
+                                        </a>
+                                    </p>
+                                    
                                 </td>
                             </tr>   
                             @endforeach            

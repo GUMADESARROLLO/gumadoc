@@ -40,7 +40,7 @@ class DocumentosController extends Controller
     public function Details($DocID)
     {
         $Documento = Documentos::Where('DOCUMENTO', $DocID)->first();
-        return view('Documents.Details', compact('Documento'));
+        return view('Documents.details', compact('Documento'));
     }
     public function UploadNAS(Request $request)
     {

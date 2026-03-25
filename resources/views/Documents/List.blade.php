@@ -14,11 +14,11 @@
                     <table class="table mb-0 table-borderless fs--2 border-200 overflow-hidden table-running-project" id="documentsTable">
                         <thead class="bg-light">
                             <tr class="text-800">
-                                <th class="sort" data-sort="projects">Documentos</th>
-                                <th class="sort" data-sort="projects">Adjuntos</th>
-                                <th class="sort text-center" data-sort="worked">Unidad Negocio</th>
-                                <th class="sort text-center" data-sort="time">Departamento</th>
-                                <th class="sort text-center" data-sort="date">Fecha Creacion</th>
+                                <th class="sort" data-sort="projects">DOCUMENTOS</th>
+                                <th class="sort" data-sort="projects">ADJUNTOS</th>
+                                <th class="sort text-center" data-sort="worked">UNIDAD</th>
+                                <th class="sort text-center" data-sort="time">DEPARTAMENTO</th>
+                                <th class="sort text-center" data-sort="date">CREACION</th>
                                 <th class="text-center"> - </th>
                             </tr>
                         </thead>
@@ -41,14 +41,14 @@
                                 <td class="align-middle text-center"> {{ $d->UNIDAD_NEGOCIO }}</td>
                                 <td class="align-middle text-center"> {{ $d->DEPARTAMENTO }}</td>
                                 <td class="align-middle text-center date">
-                                    <p class="fs--1 mb-0 fw-semi-bold"> {{ $d->created_at }}</p>
+                                    <p class="fs--1 mb-0 fw-semi-bold"> {{ Date::parse($d->created_at)->format('D, M d, Y ')  }}</p>
                                 </td>
                                 <td class="align-middle text-center ">
                                     <p class="mb-0"> 
                                         <a href="../deta-doc/{{ $d->DOCUMENTO }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">
                                             <i class="bi bi-download"></i> Actualizar  
                                         </a>
-                                        <a href="#!" class="btn btn-sm btn-outline-danger me-2">
+                                        <a href="#!" class="btn btn-sm btn-outline-danger me-2" onclick="DeleteDocument({{ $d->DOCUMENTO }})">
                                             <i class="bi bi-download"></i> Remover
                                         </a>
                                     </p>

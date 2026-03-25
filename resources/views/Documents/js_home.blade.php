@@ -23,4 +23,45 @@
     
         
     })
+
+
+    function DeleteDocument(DocID) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Seguro que desea eliminar el archivo ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'S&iacute;',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '../DeleteDocument/' + DocID,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.status == 'ok') {
+                            Swal.fire(
+                                'Eliminado!',
+                                'El archivo ha sido eliminado con exito.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "list-doc" ;
+                                }
+                            })
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'No se ha podido eliminar el archivo.',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
+
 </script>

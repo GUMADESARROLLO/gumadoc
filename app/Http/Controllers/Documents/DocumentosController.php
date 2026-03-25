@@ -12,7 +12,7 @@ use Validator;
 
 use App\Models\Documentos;
 use App\Models\Adjuntos;
-
+use Jenssegers\Date\Date;
 class DocumentosController extends Controller
 {
     
@@ -34,6 +34,7 @@ class DocumentosController extends Controller
     }
     public function ListaDocumentos()
     {
+        \Date::setLocale('es');
         $Documentos = Documentos::Where('ACTIVO', '!=', 'N')->get();
         return view('Documents.List', compact('Documentos'));
     }
@@ -68,11 +69,11 @@ class DocumentosController extends Controller
         $Unidad = $request->input('UnidadNegocio');
         $Depart = $request->input('Departamento');
         $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
-        $FileNa = $request->file('UploadMe')->getClientOriginalName();         
-        $PathSt = $Unidad . '/'. $Depart . '/' . time() . '-' . $file->getClientOriginalName();
+        $FileNa = $request->file('UploadMe')->getClientOriginalName();                 
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
-        
+
+        $PathSt = $Unidad . '/'. $Depart . '/' . time() . '-' . $file->getClientOriginalName();        
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
         
         if($Minio){
@@ -191,6 +192,16 @@ class DocumentosController extends Controller
         $adjunto->delete();
 
         return response()->json(['status' => 'ok', 'message' => 'Archivo eliminado correctamente'], 200);
+    }
+
+    public function DeleteDocument($id)
+    {
+        $documento = Documentos::findOrFail($id);
+
+        $documento->ACTIVO = 'N';
+        $documento->save();
+
+        return response()->json(['status' => 'ok', 'message' => 'Documento eliminado correctamente'], 200);
     }
     
 }

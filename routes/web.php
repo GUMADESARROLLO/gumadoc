@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\FilePreviewController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Documents\DocumentosController;
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/UserUpdate/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/UserDelete/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     Route::post('/getDepartamento', [UsersController::class, 'getDepartamento'])->name('getDepartamento');
+    Route::get('/file-preview/{fileName}', [FilePreviewController::class, 'filePreview']);
 
 });
 

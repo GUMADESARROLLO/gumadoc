@@ -5,19 +5,27 @@
     <div class="container-fluid">        
         <div class="row min-vh-100 bg-100">
             <div class="col-6 d-none d-lg-block position-relative">
-                <div class="bg-holder" style="background-image:url(falcon/assets/img/generic/14.jpg);background-position: 50% 20%;">
+                <div class="bg-holder" style="background-image:url(falcon/assets/img/generic/bg-gumadocs.jpg);background-position: 50% 20%;">
             </div>
         </div>
         <div class="col-sm-10 col-md-6 px-sm-0 align-self-center mx-auto py-5">
             <div class="row justify-content-center g-0">
+                
                 <div class="col-lg-9 col-xl-8 col-xxl-6">
+                    
+                    <a class="d-flex flex-center mb-4" href="#!">
+                        <img class="me-2" src="img/guma.png" alt="" width="250" />
+                    </a>
                     <div class="card">
-                        <div class="card-header bg-circle-shape bg-shape text-center p-2"><a class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light" href="../../../index.html">GUMADOCS</a></div>
+                        
+                        
+                        <div class="card-header bg-circle-shape bg-shape text-center p-2">
+                            <a class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light" href="#!">GUMADOCS</a></div>
                             <div class="card-body p-4">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="mb-3">
-                                    <label class="form-label" for="email">Correo:</label>
+                                    <label class="form-label" for="email">EMAIL:</label>
                                     <input class="form-control" id="email" type="email" name="email"  :value="old('email')" required autofocus />
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                 </div>

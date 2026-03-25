@@ -107,5 +107,62 @@ class DocumentosController extends Controller
         return back()->with(['status' => 'error', 'message' => 'Error al subir el archivo'], 422)->header('Content-Type', 'application/json');
 
     }
+
+    public function uploadAttachment(Request $request)
+    {
+        
+
+        $rules = [
+            'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:25600'
+        ];
+
+        $messages = [
+            'file.required' => 'El archivo es requerido',
+            'file.max' => 'El archivo no puede ser mayor a 25MB',
+            'file.mimes' => 'El archivo debe ser de tipo PDF, DOC, DOCX, JPG, JPEG, PNG',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 'error', 'message' => $validator->messages()->first()], 422);
+        }
+
+        $file = $request->file('file');
+
+        $id = $request->input('num_doc');
+        $Documento = Documentos::find($id);
+
+        if (!$Documento) {
+            return response()->json(['status' => 'error', 'message' => 'Documento no encontrado'], 404);
+        }
+
+        $Unidad = $Documento->UNIDAD_NEGOCIO;
+        $Depart = $Documento->DEPARTAMENTO;
+        $PathSt = $Unidad . '/' . $Depart . '/' . time() . '-' . $file->getClientOriginalName();
+        $NameUS = Auth::user()->email;
+        $UserID = Auth::user()->id;
+        $Extenc = $file->getClientOriginalExtension();
+        $FileNa = $file->getClientOriginalName();
+
+        $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
+
+        if ($Minio) {
+            $Url = Storage::disk('s3')->url($PathSt);
+
+            $Adjunto = new Adjuntos();
+            $Adjunto->DOC_ID = $id;
+            $Adjunto->STORAGE_PATH = $PathSt;
+            $Adjunto->DOCUMENT_TYPE = $Extenc;
+            $Adjunto->DOCUMENT_NAME = $FileNa;
+            $Adjunto->created_by = $NameUS;
+            $Adjunto->user_id = $UserID;
+            $Adjunto->save();
+
+            return response()->json(['status' => 'ok', 'message' => 'Archivo subido correctamente', 'path' => $Url], 200);
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Error al subir el archivo'], 422);
+    }
     
 }

@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/deta-doc/{id}', [DocumentosController::class, 'Details'])->name('deta-doc');
 
     Route::post('/UploadNAS', [DocumentosController::class, 'UploadNAS'])->name('UploadNAS');
+    Route::post('/uploadAttachment', [DocumentosController::class, 'uploadAttachment'])->name('uploadAttachment');
 });
 
 Route::middleware('auth')->group(function () {

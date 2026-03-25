@@ -29,7 +29,7 @@
                 <div class="col-5 col-sm-4">
                     <p class="fw-semi-bold mb-1">NUM. DOC.</p>
                 </div>
-                <div class="col">{{ $Documento->DOCUMENTO }}</div>
+                <div class="col" id="num_doc">{{ $Documento->DOCUMENTO }}</div>
             </div>
             <div class="row">
                 <div class="col-5 col-sm-4">
@@ -129,34 +129,40 @@
           <h4 class="mb-1" id="staticBackdropLabel">Subir Archivo</h4>
           <p class="fs--2 mb-0">Agregar un nuevo archivo</p>
         </div>
-        <div class="p-4">            
-            <form action="" method="POST" id="FrmArchivos" >
-                <div class="mb-3">
-                    <div class="row" data-dropzone="data-dropzone" data-options='{"maxFiles":1,"data":[{"name":"avatar.png","size":"25000","url":"assets/img/team"}]}'>
-                        <div class="fallback">
-                            <input type="file" name="file" />
+        <div class="p-4">    
+            <form id="myDropzone" class="dropzone dropzone-multiple p-0" data-dropzone="data-dropzone" action="#!" >
+                <div class="fallback">
+                  <input name="file" type="file" />
+                </div>
+                <div class="dz-message" data-dz-message="data-dz-message"> 
+                    <img class="me-2" src="{{ asset('falcon/assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />Drop your files here
+                </div>
+                <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                  <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger">
+                    <img class="dz-image" src="{{ asset('falcon/assets/img/generic/image-file-2.png') }}" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+                    <div class="flex-1 d-flex flex-between-center">
+                      <div>
+                        <h6 data-dz-name="data-dz-name"></h6>
+                        <div class="d-flex align-items-center">
+                          <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                          <div class="dz-progress">
+                            <span class="dz-upload" data-dz-uploadprogress=""></span>
                         </div>
-                        <div class="col-md-auto">
-                            <div class="dz-preview dz-preview-single">
-                                <div class="dz-preview-cover d-flex align-items-center justify-content-center ">                                    
-                                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-md">
-                            <div class="dz-message dropzone-area px-2 py-3" data-dz-message="data-dz-message">
-                                <div class="text-center">Upload your profile picture
-                                    <p class="mb-0 fs--1 text-400">Upload a 300x300 jpg image with <br />a maximum size of 400KB</p>
-                                </div>
-                            </div>
+                      </div>
+                      <div class="dropdown font-sans-serif">
+                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" 
+                        type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-ellipsis-h"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end border py-2">
+                            <a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary me-2" type="submit">Subir</button>
-                    <button class="btn btn-link" type="button" data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </form>
+              </form>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('Layouts.lyt_dashboard')
+@extends('layouts.lyt_dashboard')
 @section('scripts')
     @include('Documents.js_new-doc')
 @endsection

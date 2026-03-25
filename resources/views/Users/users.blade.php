@@ -1,4 +1,4 @@
-@extends('Layouts.lyt_dashboard')
+@extends('layouts.lyt_dashboard')
 @section('scripts')
     @include('Users.js_users')
 @endsection

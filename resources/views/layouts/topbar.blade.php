@@ -12,7 +12,7 @@
   </button>
   <a class="navbar-brand me-1 me-sm-3" href="{{ route('dashboard') }}">
     <div class="d-flex align-items-center">
-      <span class="font-sans-serif">gumadocs</span>
+      <img class="me-2" src="{{ asset('img/guma.png') }}" alt="" width="150" />
     </div>
   </a>
 

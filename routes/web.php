@@ -22,7 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/deta-doc/{id}', [DocumentosController::class, 'Details'])->name('deta-doc');
 
     Route::post('/UploadNAS', [DocumentosController::class, 'UploadNAS'])->name('UploadNAS');
-    Route::post('/uploadAttachment', [DocumentosController::class, 'uploadAttachment'])->name('uploadAttachment');
+    Route::post('/UploadAttachment', [DocumentosController::class, 'UploadAttachment'])->name('UploadAttachment');
+    Route::get('/DownloadAttachment/{fileName}', [DocumentosController::class, 'DownloadAttachment'])->name('DownloadAttachment');
+    Route::get('/DeleteAttachment/{fileName}', [DocumentosController::class, 'DeleteAttachment'])->name('DeleteAttachment');
 });
 
 Route::middleware('auth')->group(function () {
@@ -31,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/UserUpdate/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/UserDelete/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     Route::post('/getDepartamento', [UsersController::class, 'getDepartamento'])->name('getDepartamento');
+
     Route::get('/filePreview/{fileName}', [FilePreviewController::class, 'filePreview'])->name('filePreview');
+    
 
 });
 

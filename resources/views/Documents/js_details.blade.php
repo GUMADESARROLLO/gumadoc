@@ -6,13 +6,13 @@
 
         // If a Dropzone instance already exists on this element, destroy it first to prevent "Dropzone already attached".
         var existingDropzone = Dropzone.forElement("#myDropzone");
-        
+
         if (existingDropzone) {
             existingDropzone.destroy();
         }
 
         var myDropzone = new Dropzone("#myDropzone", {
-            url: "../uploadAttachment",
+            url: "../UploadAttachment",
             method: "POST",
             paramName: "file",
             maxFiles: 1,
@@ -37,4 +37,44 @@
             }
         });
     })
+
+    function DeleteAttachment(AttID) {
+        const DocID = $('#num_doc').text();
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Seguro que desea eliminar el archivo ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'S&iacute;',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '../DeleteAttachment/' + AttID,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.status == 'ok') {
+                            Swal.fire(
+                                'Eliminado!',
+                                'El archivo ha sido eliminado con exito.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "../deta-doc/" + DocID;
+                                }
+                            })
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'No se ha podido eliminar el archivo.',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
 </script>

@@ -128,6 +128,8 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('scripts')
 
   </body>

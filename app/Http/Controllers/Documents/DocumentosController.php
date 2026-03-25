@@ -108,7 +108,7 @@ class DocumentosController extends Controller
 
     }
 
-    public function uploadAttachment(Request $request)
+    public function UploadAttachment(Request $request)
     {
         
 
@@ -163,6 +163,34 @@ class DocumentosController extends Controller
         }
 
         return response()->json(['status' => 'error', 'message' => 'Error al subir el archivo'], 422);
+    }
+    public function DownloadAttachment($id)
+    {
+        $adjunto = Adjuntos::findOrFail($id);
+
+        $filePath = $adjunto->STORAGE_PATH;
+        $fileName = $adjunto->FILE_NAME ?? basename($filePath);
+
+        $fileUrl = Storage::disk('s3')->temporaryUrl(
+            $filePath,
+            now()->addMinutes(5),
+            [
+                'ResponseContentDisposition' => 'attachment; filename="' . addslashes($fileName) . '"'
+            ]
+        );
+
+        return redirect($fileUrl);
+    }
+
+    public function DeleteAttachment($id)
+    {
+        $adjunto = Adjuntos::findOrFail($id);
+
+        Storage::disk('s3')->delete($adjunto->STORAGE_PATH);
+
+        $adjunto->delete();
+
+        return response()->json(['status' => 'ok', 'message' => 'Archivo eliminado correctamente'], 200);
     }
     
 }

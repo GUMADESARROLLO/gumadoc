@@ -31,8 +31,6 @@
                 </div>
                 <div class="col" id="num_doc">{{ $Documento->DOCUMENTO }} </div>
             </div>
-            
-          
             <div class="row">
                 <div class="col-5 col-sm-4">
                     <p class="fw-semi-bold mb-1">UNIDAD</p>

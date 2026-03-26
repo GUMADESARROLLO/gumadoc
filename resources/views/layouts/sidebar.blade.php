@@ -60,13 +60,25 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('list-doc') }}" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">DEPART. LEGAL</span>
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">LEGAL</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('list-doc') }}" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">DEPART. REGENCIA</span>
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">REGENCIA</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('list-doc') }}" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">GESTION HUMANA</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('list-doc') }}" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CARTERA&COBRO</span>
                                 </div>
                             </a>
                         </li>

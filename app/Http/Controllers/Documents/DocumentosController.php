@@ -19,8 +19,44 @@ class DocumentosController extends Controller
     
     public function Dashboard()
     {
-        //return view('Documents.dashboard');
-        return view('Dashboard.Home');
+        $Metricas = Documentos::getMetricas();
+
+        $idx_legal = array_search('DEPT. LEGAL', array_column($Metricas, 'DEPARTAMENTO'));
+        $idx_regen = array_search('DEPT. REGENCIA', array_column($Metricas, 'DEPARTAMENTO'));
+        $idx_human = array_search('GESTION HUMANA', array_column($Metricas, 'DEPARTAMENTO'));
+        $idx_cobro = array_search('CARTERA COBRO', array_column($Metricas, 'DEPARTAMENTO'));
+
+
+        
+        $CountLegal = $idx_legal === false ? 0 : ($Metricas[$idx_legal] ?? ['total' => 0])['total'];
+        $CountRegen = $idx_regen === false ? 0 : ($Metricas[$idx_regen] ?? ['total' => 0])['total'];
+        $CountHuman = $idx_human === false ? 0 : ($Metricas[$idx_human] ?? ['total' => 0])['total'];
+        $CountCobro = $idx_cobro === false ? 0 : ($Metricas[$idx_cobro] ?? ['total' => 0])['total'];
+
+        $SizeLegal = $idx_legal === false ? 0 : ($Metricas[$idx_legal] ?? ['total_size' => 0])['total_size'];
+        $SizeRegen = $idx_regen === false ? 0 : ($Metricas[$idx_regen] ?? ['total_size' => 0])['total_size'];
+        $SizeHuman = $idx_human === false ? 0 : ($Metricas[$idx_human] ?? ['total_size' => 0])['total_size'];
+        $SizeCobro = $idx_cobro === false ? 0 : ($Metricas[$idx_cobro] ?? ['total_size' => 0])['total_size'];
+
+        $RecientDoc = Adjuntos::orderBy('created_at', 'desc')->take(5)->get();
+        $Articulos  = Documentos::Where('ACTIVO', '!=', 'N')->get();
+
+        $Stadistic = [
+            'CountLegal' => $CountLegal,
+            'CountRegen' => $CountRegen,
+            'CountHuman' => $CountHuman,
+            'CountCobro' => $CountCobro,
+
+            'SizeLegal' => $SizeLegal,
+            'SizeRegen' => $SizeRegen,
+            'SizeHuman' => $SizeHuman,
+            'SizeCobro' => $SizeCobro
+        ];
+        
+        
+
+
+        return view('Dashboard.Home', compact('Stadistic', 'RecientDoc', 'Articulos'));
     }
 
     public function Detalles()

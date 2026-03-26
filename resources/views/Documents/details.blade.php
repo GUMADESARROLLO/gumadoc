@@ -8,7 +8,7 @@
         <div class="d-flex">
             <div class="flex-1">
                 <p class="mb-0">{{ strtoupper($Documento->TITULO) }}</p>
-                <p class="fs--1 mb-0 text-600">{{ $Documento->created_at }}</p>
+                <p class="fs--1 mb-0 text-600">{{ Date::parse($Documento->created_at)->format('d-m-Y h:i')  }} - {{ $Documento->created_by }}</p>
             </div>
         </div>
     </div>
@@ -29,20 +29,10 @@
                 <div class="col-5 col-sm-4">
                     <p class="fw-semi-bold mb-1">NUM. DOC.</p>
                 </div>
-                <div class="col" id="num_doc">{{ $Documento->DOCUMENTO }}</div>
+                <div class="col" id="num_doc">{{ $Documento->DOCUMENTO }} </div>
             </div>
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-1">Creado</p>
-                </div>
-                <div class="col">{{ $Documento->created_at }}</div>
-            </div>
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-1">Usuario</p>
-                </div>
-                <div class="col">{{ $Documento->created_by }}</div>
-            </div>
+            
+          
             <div class="row">
                 <div class="col-5 col-sm-4">
                     <p class="fw-semi-bold mb-1">UNIDAD</p>
@@ -61,7 +51,15 @@
             </div>
             <div class="row">
                 <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-0">Fecha de Exp.</p>
+                    <p class="fw-semi-bold mb-1">CATEGORIA</p>
+                </div>
+                <div class="col">
+                    <p class="fst-italic text-400 mb-1">{{ $Documento->CATEGORIA }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 col-sm-4">
+                    <p class="fw-semi-bold mb-0">EXPIRACION</p>
                 </div>
                 <div class="col">
                     <p class="fst-italic text-400 mb-0"> {{ $Documento->FECHA_VENCI }} </p>
@@ -74,8 +72,7 @@
                 <div class="col">
                     <p class="mb-1">{{ $Documento->DESCRIPCION }}</p>
                 </div>
-            </div>
-            
+            </div>            
         </div>
     </div>
     </div>       
@@ -95,11 +92,11 @@
     
     <div class="card-body border-top p-0">
         @foreach ($Documento->Archivos as $Archivo)
+            
             <div class="row g-0 align-items-center border-bottom py-2 px-3">
-               
                 <div class="col-md mt-1 mt-md-0">
-                    <a href="../filePreview/{{ $Archivo->ADJUNTO }}" target="_blank" class="text-danger"> <code> {{ $Archivo->DOCUMENT_NAME }}</code> </a>
-                    <p class="fs--1 mb-0 text-600">{{ $Archivo->created_at }} - {{ $Archivo->created_by }}</p>
+                    <a href="../filePreview/{{ $Archivo->ADJUNTO }}" target="_blank" class="text-danger"> <code> {{ $Archivo->DOCUMENT_NAME }} </code> </a>
+                    <p class="fs--1 mb-0 text-600">{{ Date::parse($Archivo->created_at)->format('d-m-Y h:i') }} - {{ $Archivo->created_by }} - ( {{ $Archivo->DOCUMENT_SIZE }} MB )</p>
                 </div>
                 <div class="col-md-auto">
                     <p class="mb-0"> 

@@ -12,6 +12,7 @@ use Validator;
 
 use App\Models\Documentos;
 use App\Models\Adjuntos;
+use App\Models\Categoria;
 use Jenssegers\Date\Date;
 class DocumentosController extends Controller
 {
@@ -26,11 +27,13 @@ class DocumentosController extends Controller
     {        
         $Auth = Auth::user();       
 
-        $UserLogin = Users::where('id', $Auth->id)->first();
+        $UserLogin     = Users::where('id', $Auth->id)->first();
         $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
         $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
+        $CatLegal    = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
+
         
-        return view('Documents.new-doc', compact('UnidadNegocio', 'Departamentos'));
+        return view('Documents.new-doc', compact('UnidadNegocio', 'Departamentos', 'CatLegal'));
     }
     public function ListaDocumentos()
     {
@@ -69,11 +72,12 @@ class DocumentosController extends Controller
         $Unidad = $request->input('UnidadNegocio');
         $Depart = $request->input('Departamento');
         $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
-        $FileNa = $request->file('UploadMe')->getClientOriginalName();                 
+        $FileNa = $request->file('UploadMe')->getClientOriginalName();    
+        $NameCT = Categoria::where('CATEGO_ID', $request->input('Categorias'))->first()->DESCRIPCION;
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
-
-        $PathSt = $Unidad . '/'. $Depart . '/' . time() . '-' . $file->getClientOriginalName();        
+        $SiZeMB = number_format($file->getSize() / 1048576, 2, '.', '');
+        $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT . '/' . time() . '-' . $file->getClientOriginalName();        
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
         
         if($Minio){
@@ -85,6 +89,7 @@ class DocumentosController extends Controller
             $Documentos->FECHA_VENCI    = date('Y-m-d', strtotime($Expira));
             $Documentos->UNIDAD_NEGOCIO = $Unidad;
             $Documentos->DEPARTAMENTO   = $Depart;
+            $Documentos->CATEGORIA      = $NameCT;
             $Documentos->ACTIVO         = 'S';
             $Documentos->created_by     = $NameUS;
             $Documentos->user_id        = $UserID;
@@ -96,6 +101,7 @@ class DocumentosController extends Controller
             $Adjunto->DOC_ID         = $DocID;
             $Adjunto->STORAGE_PATH   = $PathSt;
             $Adjunto->DOCUMENT_TYPE  = $Extenc;
+            $Adjunto->DOCUMENT_SIZE  = $SiZeMB;
             $Adjunto->DOCUMENT_NAME  = $FileNa;
             $Adjunto->created_by     = $NameUS;
             $Adjunto->user_id        = $UserID;
@@ -140,11 +146,13 @@ class DocumentosController extends Controller
 
         $Unidad = $Documento->UNIDAD_NEGOCIO;
         $Depart = $Documento->DEPARTAMENTO;
-        $PathSt = $Unidad . '/' . $Depart . '/' . time() . '-' . $file->getClientOriginalName();
+        $Catego = $Documento->CATEGORIA;
+        $PathSt = $Unidad . '/' . $Depart . '/'. $Catego . '/' . time() . '-' . $file->getClientOriginalName();
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
         $Extenc = $file->getClientOriginalExtension();
         $FileNa = $file->getClientOriginalName();
+        $SiZeMB   = number_format($file->getSize() / 1048576, 2, '.', '');
 
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
 
@@ -155,6 +163,7 @@ class DocumentosController extends Controller
             $Adjunto->DOC_ID = $id;
             $Adjunto->STORAGE_PATH = $PathSt;
             $Adjunto->DOCUMENT_TYPE = $Extenc;
+            $Adjunto->DOCUMENT_SIZE = $SiZeMB;
             $Adjunto->DOCUMENT_NAME = $FileNa;
             $Adjunto->created_by = $NameUS;
             $Adjunto->user_id = $UserID;

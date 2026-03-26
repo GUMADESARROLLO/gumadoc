@@ -83,19 +83,25 @@
             return;
         }
 
-        if (!confirm('¿Desea eliminar el usuario con ID ' + UserID + '?')) {
-            return;
-        }
-
-        var form = $('<form>', {
-            method: 'POST',
-            action: '/UserDelete/' + UserID
+        Swal.fire({
+            title: "Eliminar usuario",
+            text: "¿Desea eliminar el usuario con ID " + UserID + "?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                var form = $('<form>', {
+                    method: 'POST',
+                    action: '/UserDelete/' + UserID
+                });
+                form.append($('<input>', { type: 'hidden', name: '_token', value: '{{ csrf_token() }}' }));
+                form.append($('<input>', { type: 'hidden', name: '_method', value: 'DELETE' }));
+                $('body').append(form);
+                form.submit();
+            }
         });
-
-        form.append($('<input>', { type: 'hidden', name: '_token', value: '{{ csrf_token() }}' }));
-        form.append($('<input>', { type: 'hidden', name: '_method', value: 'DELETE' }));
-        $('body').append(form);
-        form.submit();
     }
 
     function FormClean() {

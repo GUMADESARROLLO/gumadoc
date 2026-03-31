@@ -8,7 +8,7 @@
     <div class="row g-3 mb-3">
         <div class="col-xxl-12">        
             <div class="row g-3 mb-3">
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6">
                     <div class="card overflow-hidden" style="min-width: 12rem">
                         <div class="bg-holder bg-card" style="background-image:url(falcon/assets/img/icons/spot-illustrations/corner-1.png);"></div>
                         <div class="card-body position-relative">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6">
                     <div class="card overflow-hidden" style="min-width: 12rem">
                         <div class="bg-holder bg-card" style="background-image:url(falcon/assets/img/icons/spot-illustrations/corner-2.png);"></div>
 
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6" style="display: none;">
                     <div class="card overflow-hidden" style="min-width: 12rem">
                         <div class="bg-holder bg-card" style="background-image:url(falcon/assets/img/icons/spot-illustrations/corner-2.png);"></div>
 
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6" style="display: none;">
                     <div class="card overflow-hidden" style="min-width: 12rem">
                         <div class="bg-holder bg-card" style="background-image:url(falcon/assets/img/icons/spot-illustrations/corner-3.png);"></div>
                         <div class="card-body position-relative">

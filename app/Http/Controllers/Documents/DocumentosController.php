@@ -88,10 +88,15 @@ class DocumentosController extends Controller
     public function Details($DocID)
     {
         $Documento = Documentos::Where('DOCUMENTO', $DocID)->first();
-        return view('Documents.details', compact('Documento'));
+        $Depar      = Departamento::PermisosDepertamento();
+        return view('Documents.details', compact('Documento', 'Depar'));
     }
     public function UploadNAS(Request $request)
     {
+        $Auth           = Auth::user();
+        $UserLogin      = Users::where('id', $Auth->id)->first();
+        $Departa_asign  = $UserLogin->departamentos->id_dept;
+
         $rules = [
             'UploadMe' => 'required|file|mimes:zip,rar,pdf,doc,jpg,png,rar,zip|max:157286400'
         ];
@@ -133,6 +138,7 @@ class DocumentosController extends Controller
             $Documentos->FECHA_VENCI    = date('Y-m-d', strtotime($Expira));
             $Documentos->UNIDAD_NEGOCIO = $Unidad;
             $Documentos->DEPARTAMENTO   = $Depart;
+            $Documentos->DEPA_ID        = $Departa_asign;
             $Documentos->CATEGORIA      = $NameCT;
             $Documentos->ACTIVO         = 'S';
             $Documentos->created_by     = $NameUS;
@@ -161,7 +167,6 @@ class DocumentosController extends Controller
 
     public function UploadAttachment(Request $request)
     {
-        
 
         $rules = [
             'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png,zip,rar|max:157286400',

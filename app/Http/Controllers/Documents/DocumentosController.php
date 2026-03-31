@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Validator;
 
 use App\Models\Documentos;
+use App\Models\Departamento;
 use App\Models\Adjuntos;
 use App\Models\Categoria;
 use Jenssegers\Date\Date;
@@ -40,6 +41,7 @@ class DocumentosController extends Controller
 
         $RecientDoc = Adjuntos::orderBy('created_at', 'desc')->take(5)->get();
         $Articulos  = Documentos::Where('ACTIVO', '!=', 'N')->get();
+        $Depar      = Departamento::PermisosDepertamento();
 
         $Stadistic = [
             'CountLegal' => $CountLegal,
@@ -56,7 +58,7 @@ class DocumentosController extends Controller
         
 
 
-        return view('Dashboard.Home', compact('Stadistic', 'RecientDoc', 'Articulos'));
+        return view('Dashboard.Home', compact('Stadistic', 'RecientDoc', 'Articulos', 'Depar'));
     }
 
     public function Detalles()
@@ -67,15 +69,21 @@ class DocumentosController extends Controller
         $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
         $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
         $CatLegal    = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
+        $Depar = Departamento::PermisosDepertamento();
 
         
-        return view('Documents.new-doc', compact('UnidadNegocio', 'Departamentos', 'CatLegal'));
+        return view('Documents.new-doc', compact('UnidadNegocio', 'Departamentos', 'CatLegal', 'Depar'));
     }
-    public function ListaDocumentos()
+    public function ListaDocumentos( $Depart)
     {
         \Date::setLocale('es');
-        $Documentos = Documentos::Where('ACTIVO', '!=', 'N')->get();
-        return view('Documents.List', compact('Documentos'));
+
+
+        
+        $Documentos = Documentos::Where('ACTIVO', '!=', 'N')->Where('DEPA_ID', $Depart)->get();
+        $Depar = Departamento::PermisosDepertamento();
+
+        return view('Documents.List', compact('Documentos', 'Depar'));
     }
     public function Details($DocID)
     {

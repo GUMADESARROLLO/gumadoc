@@ -22,8 +22,9 @@ class UsersController extends Controller
         $Users = Users::getUsuers($request);
         $UNID  = UnidadNegocio::getUNID();
         $Roles = Users::getRoles();
+        $Depar = Departamento::PermisosDepertamento();
 
-        return view('Users.users', ['Users' => $Users, 'UNID' => $UNID, 'Roles' => $Roles]);
+        return view('Users.users', ['Users' => $Users, 'UNID' => $UNID, 'Roles' => $Roles, 'Depar' => $Depar]);
     }
 
     public function getDepartamento(Request $request)

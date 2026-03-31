@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DocumentosController::class, 'Dashboard'])->name('dashboard');
     Route::get('/new-doc', [DocumentosController::class, 'Detalles'])->name('new-doc');
-    Route::get('/list-doc', [DocumentosController::class, 'ListaDocumentos'])->name('list-doc');
+    Route::get('/list-doc/{Depart}', [DocumentosController::class, 'ListaDocumentos'])->name('list-doc');
     Route::get('/deta-doc/{id}', [DocumentosController::class, 'Details'])->name('deta-doc');
 
     Route::post('/UploadNAS', [DocumentosController::class, 'UploadNAS'])->name('UploadNAS');

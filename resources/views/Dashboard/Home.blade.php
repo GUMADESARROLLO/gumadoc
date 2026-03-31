@@ -62,7 +62,7 @@
                             <div class="col-auto col-sm-6 col-lg-5">
                                 <div class="h-100">
                                     <div class="input-group">
-                                        <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Buscar" aria-label="search" />
+                                        <input class="form-control form-control-sm shadow-none search" id="txt_search" type="search" placeholder="Buscar" aria-label="search" />
                                         <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
                                     </div>
                                 </div>

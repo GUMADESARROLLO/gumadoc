@@ -15,9 +15,17 @@ class Users extends Model {
     {
         return $this->hasOne(UserDepartamento::class, 'id_user', 'id');
     }
+    public function Rol()
+    {
+        return $this->hasOne(Rol::class, 'id', 'rol_id');
+    }
 
 
     public static function getUsuers(Request $request) {
         return Users::where('activo', '!=', 'N')->get();
+    }
+
+    public static function getRoles() {
+        return Rol::Where('activo', '!=', 'N')->get();
     }
 }

@@ -21,8 +21,9 @@ class UsersController extends Controller
     {
         $Users = Users::getUsuers($request);
         $UNID  = UnidadNegocio::getUNID();
+        $Roles = Users::getRoles();
 
-        return view('Users.users', ['Users' => $Users, 'UNID' => $UNID]);
+        return view('Users.users', ['Users' => $Users, 'UNID' => $UNID, 'Roles' => $Roles]);
     }
 
     public function getDepartamento(Request $request)
@@ -51,6 +52,7 @@ class UsersController extends Controller
             $user->email    = $request->email;
             $user->password = Hash::make($request->password);
             $user->Activo   = 'S';
+            $user->rol_id   = $request->rol ?? null;
             $user->save();
 
             // RECUPERA EL ID QUE SE LE ASIGNO AL USUARIO
@@ -89,6 +91,7 @@ class UsersController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);   
+            $user->rol_id   = $request->rol ?? null;
             $user->save();
 
             $UND_NEGO = $request->unidad_negocio ?? null;

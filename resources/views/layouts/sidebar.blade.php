@@ -47,7 +47,7 @@
                             <span class="nav-link-icon">
                                 <span class="fas fa-file-alt"></span>
                             </span>
-                            <span class="nav-link-text ps-1">DIGITALIZACION</span>
+                            <span class="nav-link-text ps-1">DEPARTAMENTOS</span>
                         </div>
                     </a>
                     <ul class="nav collapse show" id="icons">

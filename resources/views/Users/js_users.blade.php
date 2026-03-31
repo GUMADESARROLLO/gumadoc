@@ -19,6 +19,11 @@
         });
         $(".dt-length").hide();
         $(".dt-search").hide();
+        
+        $('#txt_search').on('keyup', function () {
+            var vTable = $('#tbl_users').DataTable();     
+            vTable.search(this.value).draw();
+        });
     } );
 
 
@@ -73,6 +78,8 @@
 
         $('#form_users').attr('action', '/UserUpdate/' + User.id);
         $('#form_method').val('PUT');
+
+        $("#id_rol").val(User.rol_id).change();
 
         var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
         myModal.show();

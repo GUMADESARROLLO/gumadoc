@@ -4,12 +4,8 @@
 @endsection
 
 @section('content')   
-    
-   
     <div class="py-5">
-
         <div class="container-fluid">
-
             <div class="card shadow-sm">
                 <div class="card-body">
                     @if ($errors->any())                        
@@ -28,13 +24,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <div class="mb-4">
+                    <div>
                         <div class="row align-items-center">
                             <div class="pagination d-none"></div>
                                 <div class="col">
                                     <div class="input-group">                                    
                                         <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
-                                        <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search for a page" aria-label="search" />
+                                        <input class="form-control form-control-sm shadow-none search" id="txt_search" type="search" placeholder="Buscar" aria-label="search" />
                                     </div>                                
                                 </div>
                                 <div class="col-auto d-flex">
@@ -43,26 +39,27 @@
                             </div>
                         </div>
                         <div class="table-responsive scrollbar">
-                            <table class="table table-bordered">
+                            <table class="table table-dashboard mb-0 fs--1" id="tbl_users">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">USER NAME</th>
                                     <th scope="col">EMAIL</th>
                                     <th scope="col">UNIDAD NEGOCIO</th>
-                                    <th scope="col">DEPARTAMENTO</th>                                    
+                                    <th scope="col">DEPARTAMENTO</th>         
+                                    <th scope="col">ROL</th>                           
                                     <th class="text-end" scope="col">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($Users as $user)
-                                   
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->departamentos->unidadNegocio->DESCRIPCION ?? ' - ' }}</td>
                                         <td>{{ $user->departamentos->Departamento->DESCRIPCION ?? ' - ' }}</td>
+                                        <td>{{ $user->Rol->Descripcion ?? ' - ' }}</td>
                                         <td class="text-end">
                                         <div>
                                             <button class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" onclick='Editar(@json($user))'><span class="text-500 fas fa-edit" ></span></button>
@@ -113,7 +110,7 @@
                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="unidad_negocio" class="form-label">UNIDAD DE NEGOCIO</label>
                             <select class="form-select" name="unidad_negocio" id="unidad_negocio">
                                 <option value="N/D" selected>N/D</option>
@@ -123,10 +120,19 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="departamento" class="form-label">DEPARTAMENTO</label>
                             <select class="form-select" name="departamento" id="departamento" >
                                 
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="rol" class="form-label">ROL</label>
+                            <select class="form-select" name="rol" id="id_rol">
+                                @foreach ($Roles as $rol)
+                                    <option value="{{ $rol->id }}">{{ $rol->Descripcion }}</option>
+                                @endforeach
                             </select>
                         </div>
 

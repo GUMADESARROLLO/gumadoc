@@ -7,8 +7,9 @@
     <div class="card-body border-top">
         <div class="d-flex">
             <div class="flex-1">
-                <p class="mb-0">{{ strtoupper($Documento->TITULO) }}</p>
+                <p class="mb-0">{{ $Documento->DOCUMENTO }} - {{ strtoupper($Documento->TITULO) }}</p>
                 <p class="fs--1 mb-0 text-600">{{ Date::parse($Documento->created_at)->format('d-m-Y h:i')  }} - {{ $Documento->created_by }}</p>
+                <span class="fs--1 mb-0 text-600 invisible" id="num_doc">{{ $Documento->DOCUMENTO }} </span>
             </div>
         </div>
     </div>
@@ -25,12 +26,7 @@
     <div class="row">
         <div class="col-lg col-xxl-5">
             <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informacion</h6>
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-1">NUM. DOC.</p>
-                </div>
-                <div class="col" id="num_doc">{{ $Documento->DOCUMENTO }} </div>
-            </div>
+            
             <div class="row">
                 <div class="col-5 col-sm-4">
                     <p class="fw-semi-bold mb-1">UNIDAD</p>

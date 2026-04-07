@@ -31,6 +31,8 @@ class AuthenticatedSessionController extends Controller
 
         $Auth = Auth::user();     
 
+        $Rol = $Auth->rol_id;
+
         $UserLogin = Users::where('id', $Auth->id)->first();
         $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION ?? ' - ';
         $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION ?? ' - ';
@@ -41,7 +43,9 @@ class AuthenticatedSessionController extends Controller
             'departame' => $Departamentos
         ]);
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $Path = in_array($Rol, [2, 4]) ? 'dashboard' : 'new-doc';
+
+        return redirect()->intended(route($Path, absolute: false));
     }
 
     /**

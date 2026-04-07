@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                
+                @if(in_array(Auth::user()->rol_id, [2, 4]))
                 <li class="nav-item">
                     <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
                         <div class="d-flex align-items-center">
@@ -29,13 +29,13 @@
                     </a>
                     <ul class="nav collapse show" id="dashboard">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('dashboard')}}" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">GENERAL</span>
-                                </div>
+                            <a class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }} " href="{{ route('dashboard')}}" aria-expanded="false">
+                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">GENERAL</span></div>
                             </a>
                         </li>             
                     </ul>
                 </li>
+                @endif
                 @if(Auth::user()->rol_id != 4)
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
@@ -46,10 +46,10 @@
                     </div>
                 </li>
 
-                <a class="nav-link mb-3" href="{{ route('new-doc') }}" role="button" aria-expanded="false">
+                <a class="nav-link mb-3 {{ (request()->is('new-doc')) ? 'active' : '' }}" href="{{ route('new-doc') }}" role="button" aria-expanded="false">
                     <div class="d-flex align-items-center">
                         <span class="nav-link-icon"><span class="fas fa-file-alt"></span></span>
-                        <span class="nav-link-text ps-1">AGREGAR DOC.</span>
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">AGREGAR DOC.</span></div>
                     </div>
                 </a>
                 @endif                
@@ -76,7 +76,7 @@
 
                     @foreach ($Depar as $d)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('list-doc', ['Depart' => $d->ID_DEPARTAMENTO]) }}" aria-expanded="false">
+                            <a class="nav-link {{ (request()->is('list-doc/'.$d->ID_DEPARTAMENTO)) ? 'active' : '' }} " href="{{ route('list-doc', ['Depart' => $d->ID_DEPARTAMENTO]) }}" aria-expanded="false">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">{{ $d->DESCRIPCION }}</span>
                                 </div>
                             </a>
@@ -86,7 +86,7 @@
                     
                 </ul>
                 @if (Auth::user()->rol_id == 2)
-                <a class="nav-link" href="{{ route('users.list') }}" role="button" aria-expanded="false">
+                <a class="nav-link {{ (request()->is('Users')) ? 'active' : '' }}" href="{{ route('users.list') }}" role="button" aria-expanded="false">
                     <div class="d-flex align-items-center">
                         <span class="nav-link-icon">
                             <span class="fas fa-users"></span>

@@ -121,7 +121,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="departamento" class="form-label">DEPARTAMENTO</label>
+                            <label for="departamento" class="form-label">Dpto. Actual (  ) </label>
                             <select class="form-select" name="departamento" id="departamento" >
                                 
                             </select>

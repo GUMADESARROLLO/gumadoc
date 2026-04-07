@@ -26,8 +26,7 @@
         });
     } );
 
-
-    var currentUserDepartamento = [];
+    let currentUserDepartamento = '';
 
     $("#unidad_negocio").on('change', function(){
         var unidad_negocio = $("#unidad_negocio").val();
@@ -41,12 +40,12 @@
             success: function(response) {
                 var html = '';
 
-                $.each(response, function(index, item) {
-                    var selected = currentUserDepartamento.includes(item.ID_DEPARTAMENTO) ? ' selected' : '';
-                    html += '<option value="'+item.ID_DEPARTAMENTO+'"'+selected+'>'+item.DESCRIPCION+'</option>';
+                $.each(response, function (index, item) {
+                    var selected = (item.ID_DEPARTAMENTO == currentUserDepartamento) ? ' selected' : '';
+                    html += '<option value="' + item.ID_DEPARTAMENTO + '"' + selected + '>' + item.DESCRIPCION + '</option>';
                 });
 
-                $('#departamento').html(html);
+                $('#departamento').html(html).trigger('change');
             }
         });
     });
@@ -58,11 +57,16 @@
     }
 
     function Editar(User) {
-
         if (!User || !User.id) {
             console.error('Usuario inválido para editar', User);
             return;
-        }
+        }        
+
+        var unidadNegocio = isValue(User.departamentos.unidad_negocio,'N/D',true) ;
+        var departamento = isValue(User.departamentos.departamento,'',true) ;
+
+        unidadNegocio = unidadNegocio ? unidadNegocio.PREFIJO : 'N/D';
+        departamento = departamento ? departamento.ID_DEPARTAMENTO : '';
 
         FormClean();
 
@@ -80,6 +84,10 @@
         $('#form_method').val('PUT');
 
         $("#id_rol").val(User.rol_id).change();
+        
+        // Guardamos temporalmente el departamento a seleccionar
+        currentUserDepartamento = departamento;
+        $("#unidad_negocio").val(unidadNegocio).trigger('change');
 
         var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
         myModal.show();
@@ -121,7 +129,7 @@
         $('#form_method').val('POST');
         $('#password').prop('required', true);
         $('#password_confirmation').prop('required', true);
-        $('#unidad_negocio').val('N/D').trigger('change');
-        $('#departamento').html('<option value="">Departamento</option>');
+        // $('#unidad_negocio').val('N/D').trigger('change');
+        // $('#departamento').html('<option value="">Departamento</option>');
     }
 </script>

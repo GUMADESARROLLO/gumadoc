@@ -17,6 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+                
                 <li class="nav-item">
                     <a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
                         <div class="d-flex align-items-center">
@@ -32,16 +33,10 @@
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">GENERAL</span>
                                 </div>
                             </a>
-                        </li>     
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard')}}" aria-expanded="false">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">DEPARTAMENTO</span>
-                                </div>
-                            </a>
-                        </li>                    
+                        </li>             
                     </ul>
                 </li>
-                
+                @if(Auth::user()->rol_id != 4)
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">ACCIONES</div>
@@ -57,7 +52,8 @@
                         <span class="nav-link-text ps-1">AGREGAR DOC.</span>
                     </div>
                 </a>
-
+                @endif                
+                
                 <li class="nav-item">
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                         <div class="col-auto navbar-vertical-label">MODULOS</div>

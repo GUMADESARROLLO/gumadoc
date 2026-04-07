@@ -32,8 +32,8 @@ class AuthenticatedSessionController extends Controller
         $Auth = Auth::user();     
 
         $UserLogin = Users::where('id', $Auth->id)->first();
-        $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
-        $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
+        $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION ?? ' - ';
+        $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION ?? ' - ';
 
         session([
             'user_name' => $Auth->name,

@@ -13,7 +13,7 @@ class Departamento extends Model {
     {   
         $Auth             = Auth::user();
 
-        if ($Auth->rol_id == 2) {
+        if (in_array($Auth->rol_id, [2, 4])) {
             $Departamento = Departamento::all();
         } else {
             $UserLogin      = Users::where('id', $Auth->id)->first();

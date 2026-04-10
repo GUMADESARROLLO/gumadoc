@@ -77,8 +77,6 @@ class DocumentosController extends Controller
     public function ListaDocumentos( $Depart)
     {
         \Date::setLocale('es');
-
-
         
         $Documentos = Documentos::Where('ACTIVO', '!=', 'N')->Where('DEPA_ID', $Depart)->get();
         $Depar = Departamento::PermisosDepertamento();
@@ -87,9 +85,56 @@ class DocumentosController extends Controller
     }
     public function Details($DocID)
     {
-        $Documento = Documentos::Where('DOCUMENTO', $DocID)->first();
+        $Documento  = Documentos::Where('DOCUMENTO', $DocID)->first();
         $Depar      = Departamento::PermisosDepertamento();
-        return view('Documents.details', compact('Documento', 'Depar'));
+        $Categoria  = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
+        
+        return view('Documents.Details', compact('Documento', 'Depar', 'Categoria'));
+    }
+    public function Update(Request $Request)
+    {
+        try {
+            
+            $ID_DOC = $Request->input('DocID');
+            $Unidad = $Request->input('UnidadNegocio');
+            $Depart = $Request->input('Departamento');
+            $NameCT = $Request->input('CategoriaDoc');
+
+            $Doc = Documentos::where('DOCUMENTO', $ID_DOC)->firstOrFail();
+
+            $UpdateAdjuntos = $Doc->CATEGORIA != $NameCT ? true : false;
+
+            $Doc->TITULO          = $Request->input('TituloDoc');
+            $Doc->DESCRIPCION     = $Request->input('DescripcionDoc');
+            $Doc->UNIDAD_NEGOCIO  = $Unidad;
+            $Doc->DEPARTAMENTO    = $Depart;
+            $Doc->CATEGORIA       = $NameCT;
+            $Doc->save();
+
+            if ($UpdateAdjuntos) {
+                $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT ; 
+
+                $Adjuntos = Adjuntos::where('DOC_ID', $ID_DOC)->get();
+
+                foreach ($Adjuntos as $a) {
+                    $OldPath = $a->STORAGE_PATH;
+                    $NewPath = $PathSt . '/' . $a->DOCUMENT_NAME;
+
+                    if (Storage::disk('s3')->exists($OldPath)) {
+                        Storage::disk('s3')->move($OldPath, $NewPath);
+                        $a->STORAGE_PATH = $NewPath;
+                        $a->save();
+                    }
+                }
+            }
+
+            
+
+            return back()->with('status', 'Ok')->with('message', 'Documento actualizado correctamente');
+            
+        } catch (\Exception $e) {
+            return back()->with('status', 'Error')->with('message', 'Error al actualizar el documento: ' . $e->getMessage());
+        }
     }
     public function UploadNAS(Request $request)
     {
@@ -121,12 +166,12 @@ class DocumentosController extends Controller
         $Unidad = $request->input('UnidadNegocio');
         $Depart = $request->input('Departamento');
         $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
-        $FileNa = $request->file('UploadMe')->getClientOriginalName();    
+        $FileNa = time() . ' - ' .$request->file('UploadMe')->getClientOriginalName();    
         $NameCT = Categoria::where('CATEGO_ID', $request->input('Categorias'))->first()->DESCRIPCION;
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
         $SiZeMB = number_format($file->getSize() / 1048576, 2, '.', '');
-        $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT . '/' . time() . '-' . $file->getClientOriginalName();        
+        $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT . '/' . $FileNa;        
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
         
         if($Minio){
@@ -196,11 +241,11 @@ class DocumentosController extends Controller
         $Unidad = $Documento->UNIDAD_NEGOCIO;
         $Depart = $Documento->DEPARTAMENTO;
         $Catego = $Documento->CATEGORIA;
-        $PathSt = $Unidad . '/' . $Depart . '/'. $Catego . '/' . time() . '-' . $file->getClientOriginalName();
+        $NameDC  = time() . ' - ' . $request->file('file')->getClientOriginalName();
+        $PathSt = $Unidad . '/' . $Depart . '/'. $Catego . '/' . $NameDC;
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
         $Extenc = $file->getClientOriginalExtension();
-        $FileNa = $file->getClientOriginalName();
         $SiZeMB   = number_format($file->getSize() / 1048576, 2, '.', '');
 
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
@@ -213,7 +258,7 @@ class DocumentosController extends Controller
             $Adjunto->STORAGE_PATH = $PathSt;
             $Adjunto->DOCUMENT_TYPE = $Extenc;
             $Adjunto->DOCUMENT_SIZE = $SiZeMB;
-            $Adjunto->DOCUMENT_NAME = $FileNa;
+            $Adjunto->DOCUMENT_NAME = $NameDC;
             $Adjunto->created_by = $NameUS;
             $Adjunto->user_id = $UserID;
             $Adjunto->save();

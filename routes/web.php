@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/DownloadAttachment/{fileName}', [DocumentosController::class, 'DownloadAttachment'])->name('DownloadAttachment');
     Route::get('/DeleteAttachment/{fileName}', [DocumentosController::class, 'DeleteAttachment'])->name('DeleteAttachment');
     Route::get('/DeleteDocument/{fileName}', [DocumentosController::class, 'DeleteDocument'])->name('DeleteDocument');
+
+    Route::post('/DocumentsUpdate', [DocumentosController::class, 'Update'])->name('Documents.update');
     
 });
 

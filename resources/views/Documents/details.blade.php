@@ -3,111 +3,125 @@
     @include('Documents.js_details')
 @endsection
 @section('content')
+
 <div class="card mb-3">       
     <div class="card-body border-top">
         <div class="d-flex">
-            <div class="flex-1">
-                <p class="mb-0">{{ $Documento->DOCUMENTO }} - {{ strtoupper($Documento->TITULO) }}</p>
-                <p class="fs--1 mb-0 text-600">{{ Date::parse($Documento->created_at)->format('d-m-Y h:i')  }} - {{ $Documento->created_by }}</p>
-                <span class="fs--1 mb-0 text-600 invisible" id="num_doc">{{ $Documento->DOCUMENTO }} </span>
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <h5> {{ strtoupper($Documento->TITULO) }} </h5>
+
+                    <a class="fs--1 mb-2 d-block" href="#!">
+                        {{ $Documento->UNIDAD_NEGOCIO }} / {{ $Documento->DEPARTAMENTO }} / {{ $Documento->CATEGORIA }}
+                    </a>
+                
+                    <p class="fs--1">
+                        {{ $Documento->DESCRIPCION }}
+                    </p>
+                    <p class="fs--1 mb-1"> <span>Num. Doc.: </span><strong id="num_doc">{{ $Documento->DOCUMENTO }}</strong></p>
+                    
+                    <p class="fs--1">Expiracion: <strong class="text-success">{{ $Documento->FECHA_VENCI }}</strong></p>
+                        
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="row align-items-center">
-            <div class="col">
-                <h5 class="mb-0">Detalles</h5>
-            </div>
+@if ($message = session('message'))
+    @if (str_contains($message, 'Error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    </div>
+    @else
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+@endif
+<div class="card mb-3">
+    
 <div class="card-body bg-light border-top">
     <div class="row">
-        <div class="col-lg col-xxl-5">
-            <h6 class="fw-semi-bold ls mb-3 text-uppercase">Informacion</h6>
-            
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-1">UNIDAD</p>
-                </div>
-                <div class="col">
-                    <p class="fst-italic text-400 mb-1">{{ $Documento->UNIDAD_NEGOCIO }}</p>
+        <div class="col-12">
+            <div class="overflow-hidden ">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item"><a class="nav-link px-2 px-md-3 active" id="specifications-tab" data-bs-toggle="tab" href="#tab-specifications" role="tab" aria-controls="tab-specifications" aria-selected="false">ARCHIVOS ( {{ count($Documento->Archivos) }} )</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 px-md-3" id="reviews-tab" data-bs-toggle="tab" href="#tab-reviews" role="tab" aria-controls="tab-reviews" aria-selected="false">EDITAR</a></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab-specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                        <div class="row align-items-center mt-3">
+                            <div class="col">
+                                <h5 class="mb-0"></h5>
+                            </div>
+                            <div class="col-auto">                
+                                <button class="btn btn-falcon-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="fas fa-upload fs--2 me-1"></span>Subir Archivo</button>
+                            </div>
+                        </div>
+
+                        @foreach ($Documento->Archivos as $Archivo)            
+                        <div class="row g-0 align-items-center border-bottom py-2 px-3">
+                            <div class="col-md mt-1 mt-md-0">
+                                <a href="../filePreview/{{ $Archivo->ADJUNTO }}" target="_blank" class="text-danger"> 
+                                    <code> {{ explode(' - ', $Archivo->DOCUMENT_NAME)[1] ?? $Archivo->DOCUMENT_NAME  }} </code> </a>
+                                <p class="fs--1 mb-0 text-600">{{ Date::parse($Archivo->created_at)->format('d-m-Y h:i') }} - {{ $Archivo->created_by }} - ( {{ $Archivo->DOCUMENT_SIZE }} MB )</p>
+                            </div>
+                            <div class="col-md-auto">
+                                <p class="mb-0"> 
+                                    <a href="../DownloadAttachment/{{ $Archivo->ADJUNTO }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="bi bi-download"></i> Descargar
+                                    </a>
+                                    <a href="#!" onclick="DeleteAttachment(' {{ $Archivo->ADJUNTO }}')" class="btn btn-sm btn-outline-danger me-2">
+                                        <i class="bi bi-download"></i> Remover
+                                    </a>
+                                </p>
+                            </div>                
+                        </div>
+                        @endforeach
+                        
+                    </div>
+                    <div class="tab-pane fade" id="tab-reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        <div class="row mt-3">                            
+                            <div class="col-lg-12 ps-lg-12">                                
+                                <form action="{{ route('Documents.update') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="DocID" value="{{ $Documento->DOCUMENTO }}">
+                                    <input type="hidden" name="UnidadNegocio" value="{{ $Documento->UNIDAD_NEGOCIO }}">
+                                    <input type="hidden" name="Departamento" value="{{ $Documento->DEPARTAMENTO }}">
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label" for="formGroupNameInput">TITULO:</label>
+                                        <input class="form-control" id="formGroupNameInput" type="text" value="{{ $Documento->TITULO }}" name = "TituloDoc" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="formGroupEmailInput">CATEGORIA:</label>
+                                        <select class="form-select" id="formGroupEmailInput" name="CategoriaDoc">                                          
+                                            @foreach ($Categoria as $c) 
+                                                <option value="{{ $c->DESCRIPCION }}"
+                                                    {{ strtolower(trim($c->DESCRIPCION)) == strtolower(trim($Documento->CATEGORIA)) ? 'selected' : '' }}>
+                                                    {{ $c->DESCRIPCION }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="formGrouptextareaInput">DESCRIPCION:</label>
+                                        <textarea class="form-control" id="formGrouptextareaInput" rows="7" name = "DescripcionDoc">{{ $Documento->DESCRIPCION }}</textarea>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">ACTUALIZAR</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-1">DEPARTAMENTO</p>
-                </div>
-                <div class="col">
-                    <p class="fst-italic text-400 mb-1">{{ $Documento->DEPARTAMENTO }}</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-1">CATEGORIA</p>
-                </div>
-                <div class="col">
-                    <p class="fst-italic text-400 mb-1">{{ $Documento->CATEGORIA }}</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-5 col-sm-4">
-                    <p class="fw-semi-bold mb-0">EXPIRACION</p>
-                </div>
-                <div class="col">
-                    <p class="fst-italic text-400 mb-0"> {{ $Documento->FECHA_VENCI }} </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
-            <h6 class="fw-semi-bold ls mb-3 text-uppercase">DESCRIPCION</h6>
-            <div class="row">
-                <div class="col">
-                    <p class="mb-1">{{ $Documento->DESCRIPCION }}</p>
-                </div>
-            </div>            
         </div>
     </div>
     </div>       
 </div>
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="row align-items-center">
-            <div class="col">
-                <h5 class="mb-0">Archivos ( {{ count($Documento->Archivos) }} )</h5>
-            </div>
-            <div class="col-auto">
-                
-                <button class="btn btn-falcon-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="fas fa-upload fs--2 me-1"></span>Subir Archivo</button>
-            </div>
-        </div>        
-    </div>
-    
-    <div class="card-body border-top p-0">
-        @foreach ($Documento->Archivos as $Archivo)
-            
-            <div class="row g-0 align-items-center border-bottom py-2 px-3">
-                <div class="col-md mt-1 mt-md-0">
-                    <a href="../filePreview/{{ $Archivo->ADJUNTO }}" target="_blank" class="text-danger"> <code> {{ $Archivo->DOCUMENT_NAME }} </code> </a>
-                    <p class="fs--1 mb-0 text-600">{{ Date::parse($Archivo->created_at)->format('d-m-Y h:i') }} - {{ $Archivo->created_by }} - ( {{ $Archivo->DOCUMENT_SIZE }} MB )</p>
-                </div>
-                <div class="col-md-auto">
-                    <p class="mb-0"> 
-                        <a href="../DownloadAttachment/{{ $Archivo->ADJUNTO }}" target="_blank" class="btn btn-sm btn-outline-primary me-2">
-                            <i class="bi bi-download"></i> Descargar
-                        </a>
-                        <a href="#!" onclick="DeleteAttachment(' {{ $Archivo->ADJUNTO }}')" class="btn btn-sm btn-outline-danger me-2">
-                            <i class="bi bi-download"></i> Remover
-                        </a>
-                    </p>
-                </div>                
-            </div>
-        @endforeach
-        
-    </div>        
-</div>
-
 
 <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg mt-6" role="document">
@@ -160,4 +174,5 @@
   </div>
 </div>
         
+     
 @endsection

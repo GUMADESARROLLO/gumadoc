@@ -39,8 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
     <link href="{{ asset('falcon/vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('falcon/assets/css/theme-rtl.min.css') }}" rel="stylesheet" id="style-rtl">
-    <link href="{{ asset('falcon/assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
+    <link href="{{ asset('falcon/assets/css/theme.css') }}" rel="stylesheet" id="style-default">
     <link href="{{ asset('falcon/assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
     <link href="{{ asset('falcon/assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
     
@@ -105,13 +104,13 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-      <div class="container" data-layout="container">
+      <div class="container-fluid" data-layout="fluid">
     
         @include('layouts.sidebar')
         <div class="content">
-          @include('layouts.topbar')
+            @include('layouts.topbar')
           
-          @yield('content')
+            @yield('content')
           
           <footer class="footer">
             <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">

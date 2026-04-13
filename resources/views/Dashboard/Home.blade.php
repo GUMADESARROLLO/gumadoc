@@ -118,7 +118,8 @@
                                 </div>  
                                 <div class="ms-3 flex-shrink-1 flex-grow-1">
                                     <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!"> {{ Str::limit(explode(' - ', $File->DOCUMENT_NAME)[1] ?? $File->DOCUMENT_NAME, 25) }} </a></h6>
-                                    <div class="fs--1"><span class="fw-semi-bold">{{ $File->created_by }}</span>
+                                    <div class="fs--1">
+                                        <span class="fw-semi-bold">{{ explode('@', $File->created_by)[0] }} - </span>
                                     <span class="fw-medium text-600 ms-2">{{ Date::parse($File->created_at)->format('M d, Y') }} </span></div>
                                     <div class="hover-actions end-0 top-50 translate-middle-y">
                                         <a class="btn btn-light border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" href="falcon/assets/img/icons/cloud-download.svg" download="download">

@@ -7,7 +7,19 @@
     <div class="col-12 order-xxl-3">
         <div class="card">
             <div class="card-header">
-                <h6 class="mb-0">Base de Documentos</h6>
+                <div class="row flex-between-center">
+                    <div class="col-auto col-sm-6 col-lg-7">
+                        <h6 class="mb-0 text-nowrap py-2 py-xl-0">Documentos</h6>
+                    </div>
+                    <div class="col-auto col-sm-6 col-lg-5">
+                        <div class="h-100">
+                            <div class="input-group">
+                                <input class="form-control form-control-sm shadow-none search" id="txt_search" type="search" placeholder="Buscar" aria-label="search" />
+                                <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body p-0">
                 <div class="scrollbar">

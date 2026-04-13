@@ -21,7 +21,7 @@
                     </p>
                     <p class="fs--1 mb-1"> <span>Num. Doc.: </span><strong id="num_doc">{{ $Documento->DOCUMENTO }}</strong></p>
                     
-                    <p class="fs--1">Expiracion: <strong class="text-success">{{ $Documento->FECHA_VENCI }}</strong></p>
+                    <p class="fs--1">Expiracion: <strong class="text-success">{{ Date::parse($Documento->FECHA_VENCI)->format('M d, Y') }}</strong></p>
                         
                 </div>
             </div>

@@ -14,7 +14,7 @@
                         <div class="card-body position-relative">
                             <h6>DEPART. LEGAL<span class="badge badge-soft-warning rounded-pill ms-2">  {{ $Stadistic['SizeLegal'] }} MB</span></h6>
                             <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning" > {{ $Stadistic['CountLegal'] }} </div>
-                            <a class="fw-semi-bold fs--1 text-nowrap" href="#!">Ver Todo<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                            <a class="fw-semi-bold fs--1 text-nowrap" href="{{ route('list-doc', ['Depart' => 1]) }}">Ver Todo<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <div class="card-body position-relative">
                             <h6>DEPART. REGENCIA<span class="badge badge-soft-info rounded-pill ms-2"> {{ $Stadistic['SizeRegen'] }} MB</span></h6>
                             <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info" > {{ $Stadistic['CountRegen'] }} </div>
-                            <a class="fw-semi-bold fs--1 text-nowrap" href="#!">Ver Todo<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                            <a class="fw-semi-bold fs--1 text-nowrap" href="{{ route('list-doc', ['Depart' => 2]) }}">Ver Todo<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,6 @@
                                 <thead>
                                     <tr>
                                         <th>Titulo</th>
-                                        <th>Unidad</th>
                                         <th>Fecha</th>
                                     </tr>
                                 </thead>
@@ -93,10 +92,9 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align-middle px-4" style="width:1%;"><span class="badge fs--1 w-100 badge-soft-success">{{ $doc->UNIDAD_NEGOCIO}}</span></td>
                                     <td class="align-middle px-4 text-end text-nowrap" style="width:1%;">
-                                        <h6 class="mb-0">$290.00 USD</h6>
-                                        <p class="fs--2 mb-0">15 May, 2020</p>
+                                        <h6 class="mb-0">{{ $doc->UNIDAD_NEGOCIO}}</h6>
+                                        <p class="fs--2 mb-0">{{ Date::parse($doc->created_at)->format('M d, Y') }}</p>
                                     </td>           
                                 </tr>                                
                                 @endforeach
@@ -120,7 +118,8 @@
                                 </div>  
                                 <div class="ms-3 flex-shrink-1 flex-grow-1">
                                     <h6 class="mb-1"><a class="stretched-link text-900 fw-semi-bold" href="#!"> {{ Str::limit(explode(' - ', $File->DOCUMENT_NAME)[1] ?? $File->DOCUMENT_NAME, 25) }} </a></h6>
-                                    <div class="fs--1"><span class="fw-semi-bold">{{ $File->created_by }}</span><span class="fw-medium text-600 ms-2">{{ $File->created_at }}</span></div>
+                                    <div class="fs--1"><span class="fw-semi-bold">{{ $File->created_by }}</span>
+                                    <span class="fw-medium text-600 ms-2">{{ Date::parse($File->created_at)->format('M d, Y') }} </span></div>
                                     <div class="hover-actions end-0 top-50 translate-middle-y">
                                         <a class="btn btn-light border-300 btn-sm me-1 text-600" data-bs-toggle="tooltip" data-bs-placement="top" title="Download" href="falcon/assets/img/icons/cloud-download.svg" download="download">
                                         <img src="falcon/assets/img/icons/cloud-download.svg" alt="" width="15" />

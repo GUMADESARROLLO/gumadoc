@@ -11,7 +11,7 @@ function isValue(value, def, is_return) {
         return ($.type(is_return) == 'boolean' && is_return === true ? value : true);
     }
 }
-
+tinymce.remove('.tinymce_gmDocs');
 tinymce.init({
     selector: '.tinymce_gmDocs',
     height: '50vh',

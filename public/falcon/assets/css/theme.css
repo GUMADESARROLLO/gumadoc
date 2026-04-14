@@ -25661,7 +25661,7 @@ html[dir=rtl] .img-dropdown {
 -----------------------------------------------*/
 .search-box {
   position: relative;
-  width: 21rem;
+  //width: 21rem;
   font-size: 0.8333333333rem;
 }
 .search-box .search-box-icon {

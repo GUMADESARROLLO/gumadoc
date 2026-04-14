@@ -12,7 +12,7 @@
                     <div class="card overflow-hidden" style="min-width: 12rem">
                         <div class="bg-holder bg-card" style="background-image:url(falcon/assets/img/icons/spot-illustrations/corner-1.png);"></div>
                         <div class="card-body position-relative">
-                            <h6>DEPART. LEGAL<span class="badge badge-soft-warning rounded-pill ms-2">  {{ $Stadistic['SizeLegal'] }} MB</span></h6>
+                            <h6>DEPARTAMENTO LEGAL<span class="badge badge-soft-warning rounded-pill ms-2">  {{ $Stadistic['SizeLegal'] }} MB</span></h6>
                             <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning" > {{ $Stadistic['CountLegal'] }} </div>
                             <a class="fw-semi-bold fs--1 text-nowrap" href="{{ route('list-doc', ['Depart' => 1]) }}">Ver Todo<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                         </div>
@@ -23,7 +23,7 @@
                         <div class="bg-holder bg-card" style="background-image:url(falcon/assets/img/icons/spot-illustrations/corner-2.png);"></div>
 
                         <div class="card-body position-relative">
-                            <h6>DEPART. REGENCIA<span class="badge badge-soft-info rounded-pill ms-2"> {{ $Stadistic['SizeRegen'] }} MB</span></h6>
+                            <h6>DEPARTAMENTO REGENCIA<span class="badge badge-soft-info rounded-pill ms-2"> {{ $Stadistic['SizeRegen'] }} MB</span></h6>
                             <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info" > {{ $Stadistic['CountRegen'] }} </div>
                             <a class="fw-semi-bold fs--1 text-nowrap" href="{{ route('list-doc', ['Depart' => 2]) }}">Ver Todo<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                         </div>
@@ -52,21 +52,14 @@
                 </div>
             </div>
         <div class="row g-3">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row flex-between-center">
-                            <div class="col-auto col-sm-6 col-lg-7">
-                                <h6 class="mb-0 text-nowrap py-2 py-xl-0">Todos lo Archivos</h6>
-                            </div>
-                            <div class="col-auto col-sm-6 col-lg-5">
-                                <div class="h-100">
-                                    <div class="input-group">
-                                        <input class="form-control form-control-sm shadow-none search" id="txt_search" type="search" placeholder="Buscar" aria-label="search" />
-                                        <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="search-box" >
+                            <form class="position-relative" data-bs-toggle="Buscar" data-bs-display="static">
+                                <input class="form-control search-input fuzzy-search" type="search" placeholder="Buscar..." aria-label="Buscar" id="txt_search" />
+                                <span class="fas fa-search search-box-icon"></span>
+                            </form>
                         </div>
                     </div>                    
                     <div class="card-body py-0">
@@ -105,7 +98,7 @@
                     </div>                    
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                     <div class="card h-100 h-xxl-auto">
                         <div class="card-header d-flex flex-between-center bg-light py-2">
                             <h6 class="mb-0">RECIENTE ARCHIVOS</h6><a class="py-1 fs--1 font-sans-serif" href="#!">Ver Todo</a>

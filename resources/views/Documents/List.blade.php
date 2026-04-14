@@ -3,38 +3,31 @@
     @include('Documents.js_home')
 @endsection
 @section('content')
-<div class="row g-3 mb-3">        
+<div class="row g-3">        
     <div class="col-12 order-xxl-3">
         <div class="card">
             <div class="card-header">
-                <div class="row flex-between-center">
-                    <div class="col-auto col-sm-6 col-lg-7">
-                        <h6 class="mb-0 text-nowrap py-2 py-xl-0">Documentos</h6>
-                    </div>
-                    <div class="col-auto col-sm-6 col-lg-5">
-                        <div class="h-100">
-                            <div class="input-group">
-                                <input class="form-control form-control-sm shadow-none search" id="txt_search" type="search" placeholder="Buscar" aria-label="search" />
-                                <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="search-box" >
+                    <form class="position-relative" data-bs-toggle="Buscar">
+                        <input class="form-control search-input fuzzy-search" type="search" placeholder="Buscar..." aria-label="Buscar" id="txt_search" />
+                        <span class="fas fa-search search-box-icon"></span>
+                    </form>
                 </div>
             </div>
             <div class="card-body p-0">
                 <div class="scrollbar">
-                    <table class="table mb-0 table-borderless fs--2 border-200 overflow-hidden table-running-project" id="documentsTable">
+                    <table class="table" id="documentsTable">
                         <thead class="bg-light">
                             <tr class="text-800">
-                                <th class="sort" data-sort="projects">DOCUMENTOS</th>
-                                <th class="sort" data-sort="projects">ADJUNTOS</th>
-                                <th class="sort text-center" data-sort="worked">UNIDAD</th>
-                                <th class="sort text-center" data-sort="time">DEPARTAMENTO</th>
-                                <th class="sort text-center" data-sort="date">CREACION</th>
+                                <th>DOCUMENTOS</th>
+                                <th>ADJUNTOS</th>
+                                <th class="text-center">UNIDAD</th>
+                                <th class="text-center">DEPARTAMENTO</th>
+                                <th class="text-center">CREACION</th>
                                 <th class="text-center"> - </th>
                             </tr>
                         </thead>
-                        <tbody class="list">
+                        <tbody>
                             @foreach ($Documentos as $d)
                             <tr>
                                 <td>
@@ -52,7 +45,7 @@
                                 <td class="align-middle text-center"> {{ count($d->Archivos)  }}</td>
                                 <td class="align-middle text-center"> {{ $d->UNIDAD_NEGOCIO }}</td>
                                 <td class="align-middle text-center"> {{ $d->DEPARTAMENTO }}</td>
-                                <td class="align-middle text-center date">
+                                <td class="align-middle text-center">
                                     <p class="fs--1 mb-0 fw-semi-bold"> {{ Date::parse($d->created_at)->format('D, M d, Y ')  }}</p>
                                 </td>
                                 <td class="align-middle text-center ">

@@ -18,7 +18,6 @@ tinymce.init({
     menubar: false,
     skin: utils.settings.tinymce.theme,
     content_style: ".mce-content-body { color: ".concat(utils.getGrays().black, " }"),
-    content_css: utils.settings.tinymce.css,
     statusbar: false,
     plugins: 'lists',
     toolbar: 'styleselect | bold italic link bullist numlist image blockquote table media undo redo',

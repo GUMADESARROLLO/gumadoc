@@ -56,14 +56,15 @@
                                 @foreach ($CatLegal as $c)
                                     <option value="{{$c->CATEGO_ID}}">{{$c->DESCRIPCION}}</option>
                                 @endforeach
-                            </select>
-                                                        
+                            </select>                   
                         </div>
 
 
                         <div class="mb-3">
                             <label class="form-label" for="basic-form-textarea">DESCRIPCION</label>
-                            <textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="DESCRIPCION" name="descripcion"></textarea>
+                            <div class="min-vh-50">
+                                <textarea class="tinymce_gmDocs d-none" id="basic-form-textarea"   name="descripcion"></textarea>
+                            </div>
                         </div>
 
                         <div class="mb-4">

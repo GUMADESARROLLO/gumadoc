@@ -17,7 +17,7 @@
                     </a>
                 
                     <p class="fs--1">
-                        {{ $Documento->DESCRIPCION }}
+                        {!! $Documento->DESCRIPCION !!}
                     </p>
                     <p class="fs--1 mb-1"> <span>Num. Doc.: </span><strong id="num_doc">{{ $Documento->DOCUMENTO }}</strong></p>
                     
@@ -109,7 +109,9 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="formGrouptextareaInput">DESCRIPCION:</label>
-                                        <textarea class="form-control" id="formGrouptextareaInput" rows="7" name = "DescripcionDoc">{{ $Documento->DESCRIPCION }}</textarea>
+                                        <div class="min-vh-50">
+                                            <textarea class="tinymce_gmDocs d-none"  name="DescripcionDoc" id="id_editor">{{ $Documento->DESCRIPCION }}</textarea>
+                                        </div>
                                     </div>
                                     <button class="btn btn-primary" type="submit">ACTUALIZAR</button>
                                 </form>

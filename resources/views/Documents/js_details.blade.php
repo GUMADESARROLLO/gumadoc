@@ -4,6 +4,7 @@
         var NumDoc = $('#num_doc').text();
         Dropzone.autoDiscover = false;
 
+
         // If a Dropzone instance already exists on this element, destroy it first to prevent "Dropzone already attached".
         var existingDropzone = Dropzone.forElement("#myDropzone");
 

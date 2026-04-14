@@ -89,7 +89,7 @@ class DocumentosController extends Controller
         $Depar      = Departamento::PermisosDepertamento();
         $Categoria  = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
         
-        return view('Documents.Details', compact('Documento', 'Depar', 'Categoria'));
+        return view('Documents.details', compact('Documento', 'Depar', 'Categoria'));
     }
     public function Update(Request $Request)
     {

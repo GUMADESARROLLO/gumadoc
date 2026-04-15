@@ -20,7 +20,6 @@
                         <thead class="bg-light">
                             <tr class="text-800">
                                 <th>DOCUMENTOS</th>
-                                <th>ADJUNTOS</th>
                                 <th class="text-center">UNIDAD</th>
                                 <th class="text-center">DEPARTAMENTO</th>
                                 <th class="text-center">CREACION</th>
@@ -42,7 +41,6 @@
                                     </div>
                                 </td>
                                 
-                                <td class="align-middle text-center"> {{ count($d->Archivos)  }}</td>
                                 <td class="align-middle text-center"> {{ $d->UNIDAD_NEGOCIO }}</td>
                                 <td class="align-middle text-center"> {{ $d->DEPARTAMENTO }}</td>
                                 <td class="align-middle text-center">

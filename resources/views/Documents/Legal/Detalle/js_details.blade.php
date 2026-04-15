@@ -39,6 +39,12 @@
         });
     })
 
+    $("#btnUploadDocumentos").click(function() {
+        $("#staticBackdrop").modal("show");
+        $("#staticBackdropLabel").html("CARGAR DOCUMENTOS");
+        $("#cat_doc").val("CERTIFICADOS");
+    });
+
     function DeleteAttachment(AttID) {
         const DocID = $('#num_doc').text();
         Swal.fire({

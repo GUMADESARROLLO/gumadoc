@@ -18,6 +18,10 @@ class Documentos extends Model {
     {
         return $this->hasMany(Adjuntos::class, 'DOC_ID', 'DOCUMENTO')->where('CATEGORIA', 'DOSSIERS');
     }
+    public function LegalDoc()
+    {
+        return $this->hasMany(Adjuntos::class, 'DOC_ID', 'DOCUMENTO');
+    }
 
     public static function getMetricas()
     {

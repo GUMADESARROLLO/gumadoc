@@ -1,6 +1,6 @@
 @extends('layouts.lyt_dashboard')
 @section('scripts')
-    @include('Documents.js_new-doc')
+    @include('Documents.Legal.New.js_new-doc')
 @endsection
 
 @section('content')
@@ -36,11 +36,7 @@
                         <div class="col-md-12 mb-3">
                             <label class="form-label" for="basic-form-name">TITULO CORTO DEL DOCUMENTO</label>
                             <input class="form-control" id="basic-form-name" type="text" placeholder="TITULO CORTO" name="TituloDoc" />                        
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label" for="basic-form-dob">EXPIRACION</label>
-                            <input type="text" class="form-control" name="dt_range" />
-                        </div>
+                        </div>                       
                         
                         <div class="col-md-3 mb-3">
                             <label class="form-label" for="basic-form-gender">UNIDAD DE NEGOCIO</label>
@@ -50,10 +46,11 @@
                             <label class="form-label" for="basic-form-gender">DEPARTAMENTO</label>
                             <input type="text" class="form-control" name="Departamento" value="{{$Departamentos}}" readonly />                            
                         </div>
+                        
                         <div class="col-md-3 mb-3">
                             <label class="form-label" for="basic-form-gender">CATEGORIAS</label>
                             <select class="form-select" name="Categorias" aria-label="Default select example">
-                                @foreach ($CatLegal as $c)
+                                @foreach ($Categorias as $c)
                                     <option value="{{$c->CATEGO_ID}}">{{$c->DESCRIPCION}}</option>
                                 @endforeach
                             </select>                   

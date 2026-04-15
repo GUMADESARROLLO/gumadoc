@@ -21,7 +21,7 @@
                     </p>
                     <p class="fs--1 mb-1"> <span>Num. Doc.: </span><strong id="num_doc">{{ $Documento->DOCUMENTO }}</strong></p>
                     
-                    <p class="fs--1">Expiracion: <strong class="text-success">{{ Date::parse($Documento->FECHA_VENCI)->format('M d, Y') }}</strong></p>
+                    <!-- <p class="fs--1">Expiracion: <strong class="text-success">{{ Date::parse($Documento->FECHA_VENCI)->format('M d, Y') }}</strong></p> -->
                         
                 </div>
             </div>
@@ -165,23 +165,23 @@
         <div class="p-4">    
             <form id="myDropzone" class="dropzone dropzone-multiple p-0" data-dropzone="data-dropzone" action="#!" >
                 <div class="fallback">
-                  <input name="file" type="file" />
+                    <input name="file" type="file" />
                 </div>
                 <input type="hidden" name="cat_doc" id="cat_doc" value="">
                 <div class="dz-message" data-dz-message="data-dz-message"> 
                     <img class="me-2" src="{{ asset('falcon/assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />Drop your files here
                 </div>
                 <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                  <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger">
-                    <img class="dz-image" src="{{ asset('falcon/assets/img/generic/image-file-2.png') }}" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+                    <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger">
+                        <img class="dz-image" src="{{ asset('falcon/assets/img/generic/image-file-2.png') }}" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
                     <div class="flex-1 d-flex flex-between-center">
-                      <div>
-                        <h6 data-dz-name="data-dz-name"></h6>
-                        <div class="d-flex align-items-center">
-                          <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
-                          <div class="dz-progress">
-                            <span class="dz-upload" data-dz-uploadprogress=""></span>
-                        </div>
+                        <div>
+                            <h6 data-dz-name="data-dz-name"></h6>
+                            <div class="d-flex align-items-center">
+                            <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                            <div class="dz-progress">
+                                <span class="dz-upload" data-dz-uploadprogress=""></span>
+                            </div>
                         </div>
                       </div>
                       <div class="dropdown font-sans-serif">
@@ -196,7 +196,7 @@
                     </div>
                   </div>
                 </div>
-              </form>
+            </form>
         </div>
       </div>
     </div>

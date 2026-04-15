@@ -1,6 +1,6 @@
 @extends('layouts.lyt_dashboard')
 @section('scripts')
-    @include('Documents.js_details')
+    @include('Documents.Legal.Detalle.js_details')
 @endsection
 @section('content')
 
@@ -21,7 +21,7 @@
                     </p>
                     <p class="fs--1 mb-1"> <span>Num. Doc.: </span><strong id="num_doc">{{ $Documento->DOCUMENTO }}</strong></p>
                     
-                    <p class="fs--1">Expiracion: <strong class="text-success">{{ Date::parse($Documento->FECHA_VENCI)->format('M d, Y') }}</strong></p>
+                    <!-- <p class="fs--1">Expiracion: <strong class="text-success">{{ Date::parse($Documento->FECHA_VENCI)->format('M d, Y') }}</strong></p> -->
                         
                 </div>
             </div>
@@ -48,7 +48,7 @@
         <div class="col-12">
             <div class="overflow-hidden ">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item"><a class="nav-link px-2 px-md-3 active" id="specifications-tab" data-bs-toggle="tab" href="#tab-specifications" role="tab" aria-controls="tab-specifications" aria-selected="false">ARCHIVOS ( {{ count($Documento->Archivos) }} )</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 px-md-3 active" id="specifications-tab" data-bs-toggle="tab" href="#tab-specifications" role="tab" aria-controls="tab-specifications" aria-selected="false">ARCHIVOS ( {{ count($Documento->LegalDoc) }} )</a></li>
                     <li class="nav-item"><a class="nav-link px-2 px-md-3" id="reviews-tab" data-bs-toggle="tab" href="#tab-reviews" role="tab" aria-controls="tab-reviews" aria-selected="false">EDITAR</a></li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -58,11 +58,13 @@
                                 <h5 class="mb-0"></h5>
                             </div>
                             <div class="col-auto">                
-                                <button class="btn btn-falcon-default" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="fas fa-upload fs--2 me-1"></span>Subir Archivo</button>
+                                <button class="btn btn-falcon-default" type="button" id="btnUploadDocumentos">
+                                    Subir Archivo
+                                </button>
                             </div>
                         </div>
 
-                        @foreach ($Documento->Archivos as $Archivo)            
+                        @foreach ($Documento->LegalDoc as $Archivo)            
                         <div class="row g-0 align-items-center border-bottom py-2 px-3">
                             <div class="col-md mt-1 mt-md-0">
                                 <a href="../filePreview/{{ $Archivo->ADJUNTO }}" target="_blank" class="text-danger"> 
@@ -95,17 +97,6 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="formGroupNameInput">TITULO:</label>
                                         <input class="form-control" id="formGroupNameInput" type="text" value="{{ $Documento->TITULO }}" name = "TituloDoc" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="formGroupEmailInput">CATEGORIA:</label>
-                                        <select class="form-select" id="formGroupEmailInput" name="CategoriaDoc">                                          
-                                            @foreach ($Categoria as $c) 
-                                                <option value="{{ $c->DESCRIPCION }}"
-                                                    {{ strtolower(trim($c->DESCRIPCION)) == strtolower(trim($Documento->CATEGORIA)) ? 'selected' : '' }}>
-                                                    {{ $c->DESCRIPCION }}
-                                                </option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="formGrouptextareaInput">DESCRIPCION:</label>
@@ -141,6 +132,15 @@
                 <div class="fallback">
                   <input name="file" type="file" />
                 </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label" for="basic-form-gender">CATEGORIAS</label>
+                    <select class="form-select" name="cat_doc" aria-label="Default select example">
+                        @foreach ($Categorias as $c)
+                            <option value="{{$c->CATEGO_ID}}">{{$c->DESCRIPCION}}</option>
+                        @endforeach
+                    </select>                   
+                </div>
+
                 <div class="dz-message" data-dz-message="data-dz-message"> 
                     <img class="me-2" src="{{ asset('falcon/assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />Drop your files here
                 </div>

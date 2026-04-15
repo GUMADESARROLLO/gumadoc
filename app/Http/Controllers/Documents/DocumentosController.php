@@ -64,29 +64,32 @@ class DocumentosController extends Controller
     public function Detalles()
     {        
         $Auth = Auth::user();
-        $ROL = $Auth->rol_id;
-        
-        $View = 'Documents.new-doc';
-
         $UserLogin     = Users::where('id', $Auth->id)->first();
-        $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
-        $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
-        $Categorias    = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', $ROL)->get();
-        $Depar = Departamento::PermisosDepertamento();
+        
+        
+        
+        $UnidadNegocio  = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
+        $Departamentos  = $UserLogin->departamentos->Departamento->DESCRIPCION;
+        $UserRol        = $UserLogin->departamentos->id_dept;
+        $Categorias     = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', $UserRol)->get();
+        $Depar          = Departamento::PermisosDepertamento();
+
+        
 
 
+        switch ($UserRol) {
 
-        switch ($ROL) {
-            case 'value':
-                # code...
+            case 1:
+                $View = 'Documents.Legal.New.Form';
                 break;
 
             case 2:
                 $View = 'Documents.Regencia.New.Form';
                 break;
             
+            
             default:
-                # code...
+                $View = 'Documents.new-doc';
                 break;
         }
 
@@ -106,16 +109,16 @@ class DocumentosController extends Controller
     }
     public function Details($DocID)
     {
-        $Auth = Auth::user();
-        $ROL = $Auth->rol_id;
-
         $Documento  = Documentos::Where('DOCUMENTO', $DocID)->first();
         $Depar      = Departamento::PermisosDepertamento();
-        $Categoria  = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
+        $UserRol    = $Documento->DEPA_ID;
 
-        switch ($ROL) {
-            case 'value':
-                # code...
+        $Categorias     = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', $UserRol)->get();
+        
+        switch ($UserRol) {
+
+            case 1:
+                $View = 'Documents.Legal.Detalle.Tabla';
                 break;
 
             case 2:
@@ -127,7 +130,7 @@ class DocumentosController extends Controller
                 break;
         }
         
-        return view($View, compact('Documento', 'Depar', 'Categoria'));
+        return view($View, compact('Documento', 'Depar', 'Categorias'));
     }
     public function Update(Request $Request)
     {
@@ -200,10 +203,10 @@ class DocumentosController extends Controller
 
         $Titulo = $request->input('TituloDoc');
         $Descri = $request->input('descripcion');
-        $SKUDoc = $request->input('SKUDoc');
+        $SKUDoc = $request->input('SKUDoc') ?? 'N/D';
         $Unidad = $request->input('UnidadNegocio');
         $Depart = $request->input('Departamento');
-        $Prove  = $request->input('Proveedor');
+        $Prove  = $request->input('Proveedor') ?? 'N/D';
         $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
         $FileNa = time() . ' - ' .$request->file('UploadMe')->getClientOriginalName();    
         $NameCT = Categoria::where('CATEGO_ID', $request->input('Categorias'))->first()->DESCRIPCION;

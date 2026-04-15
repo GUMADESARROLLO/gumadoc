@@ -79,15 +79,15 @@
                                             <img class="d-flex align-self-center me-2" src="falcon/assets/img/logos/atlassian.png" alt="" width="30" />
                                             <div class="flex-1">
                                                 <a class="stretched-link" href="../deta-doc/{{ $doc->DOCUMENTO }}">
-                                                    <h6 class="mb-0">{{ $doc->TITULO}} ({{ count($doc->Archivos)}})</h6>
+                                                    <h6 class="mb-0">{{ $doc->TITULO}} </h6>
                                                 </a>
-                                                <p class="mb-0">{{ $doc->DEPARTAMENTO}} / {{ $doc->CATEGORIA}}</p>
+                                                <p class="mb-0">{{ $doc->DEPARTAMENTO}} / {{ $doc->UNIDAD_NEGOCIO}}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="align-middle px-4 text-end text-nowrap" style="width:1%;">
-                                        <h6 class="mb-0">{{ $doc->UNIDAD_NEGOCIO}}</h6>
-                                        <p class="fs--2 mb-0">{{ Date::parse($doc->created_at)->format('M d, Y') }}</p>
+                                        <h6 class="mb-0">{{ Date::parse($doc->created_at)->format('M d, Y') }}</h6>
+                                        <p class="fs--2 mb-0">{{ $doc->REF}}</p>
                                     </td>           
                                 </tr>                                
                                 @endforeach

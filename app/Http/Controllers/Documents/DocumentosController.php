@@ -63,16 +63,35 @@ class DocumentosController extends Controller
 
     public function Detalles()
     {        
-        $Auth = Auth::user();       
+        $Auth = Auth::user();
+        $ROL = $Auth->rol_id;
+        
+        $View = 'Documents.new-doc';
 
         $UserLogin     = Users::where('id', $Auth->id)->first();
         $UnidadNegocio = $UserLogin->departamentos->unidadNegocio->DESCRIPCION;
         $Departamentos = $UserLogin->departamentos->Departamento->DESCRIPCION;
-        $CatLegal    = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
+        $Categorias    = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', $ROL)->get();
         $Depar = Departamento::PermisosDepertamento();
 
+
+
+        switch ($ROL) {
+            case 'value':
+                # code...
+                break;
+
+            case 2:
+                $View = 'Documents.Regencia.New.Form';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
         
-        return view('Documents.new-doc', compact('UnidadNegocio', 'Departamentos', 'CatLegal', 'Depar'));
+        return view($View, compact('UnidadNegocio', 'Departamentos', 'Categorias', 'Depar'));
     }
     public function ListaDocumentos( $Depart)
     {
@@ -81,15 +100,34 @@ class DocumentosController extends Controller
         $Documentos = Documentos::Where('ACTIVO', '!=', 'N')->Where('DEPA_ID', $Depart)->get();
         $Depar = Departamento::PermisosDepertamento();
 
+        
+
         return view('Documents.List', compact('Documentos', 'Depar'));
     }
     public function Details($DocID)
     {
+        $Auth = Auth::user();
+        $ROL = $Auth->rol_id;
+
         $Documento  = Documentos::Where('DOCUMENTO', $DocID)->first();
         $Depar      = Departamento::PermisosDepertamento();
         $Categoria  = Categoria::where('ACTIVO', 'S')->Where('DEPT_ID', 1)->get();
+
+        switch ($ROL) {
+            case 'value':
+                # code...
+                break;
+
+            case 2:
+                $View = 'Documents.Regencia.Detalle.Tabla';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
         
-        return view('Documents.details', compact('Documento', 'Depar', 'Categoria'));
+        return view($View, compact('Documento', 'Depar', 'Categoria'));
     }
     public function Update(Request $Request)
     {
@@ -98,35 +136,35 @@ class DocumentosController extends Controller
             $ID_DOC = $Request->input('DocID');
             $Unidad = $Request->input('UnidadNegocio');
             $Depart = $Request->input('Departamento');
-            $NameCT = $Request->input('CategoriaDoc');
+            //$NameCT = $Request->input('CategoriaDoc');
 
             $Doc = Documentos::where('DOCUMENTO', $ID_DOC)->firstOrFail();
 
-            $UpdateAdjuntos = $Doc->CATEGORIA != $NameCT ? true : false;
+            //$UpdateAdjuntos = $Doc->CATEGORIA != $NameCT ? true : false;
 
             $Doc->TITULO          = $Request->input('TituloDoc');
             $Doc->DESCRIPCION     = $Request->input('DescripcionDoc');
             $Doc->UNIDAD_NEGOCIO  = $Unidad;
             $Doc->DEPARTAMENTO    = $Depart;
-            $Doc->CATEGORIA       = $NameCT;
+            //$Doc->CATEGORIA       = $NameCT;
             $Doc->save();
 
-            if ($UpdateAdjuntos) {
-                $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT ; 
+            // if ($UpdateAdjuntos) {
+            //     $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT ; 
 
-                $Adjuntos = Adjuntos::where('DOC_ID', $ID_DOC)->get();
+            //     $Adjuntos = Adjuntos::where('DOC_ID', $ID_DOC)->get();
 
-                foreach ($Adjuntos as $a) {
-                    $OldPath = $a->STORAGE_PATH;
-                    $NewPath = $PathSt . '/' . $a->DOCUMENT_NAME;
+            //     foreach ($Adjuntos as $a) {
+            //         $OldPath = $a->STORAGE_PATH;
+            //         $NewPath = $PathSt . '/' . $a->DOCUMENT_NAME;
 
-                    if (Storage::disk('s3')->exists($OldPath)) {
-                        Storage::disk('s3')->move($OldPath, $NewPath);
-                        $a->STORAGE_PATH = $NewPath;
-                        $a->save();
-                    }
-                }
-            }
+            //         if (Storage::disk('s3')->exists($OldPath)) {
+            //             Storage::disk('s3')->move($OldPath, $NewPath);
+            //             $a->STORAGE_PATH = $NewPath;
+            //             $a->save();
+            //         }
+            //     }
+            // }
 
             
 
@@ -162,35 +200,44 @@ class DocumentosController extends Controller
 
         $Titulo = $request->input('TituloDoc');
         $Descri = $request->input('descripcion');
-        $Expira = $request->input('dt_range');
+        $SKUDoc = $request->input('SKUDoc');
         $Unidad = $request->input('UnidadNegocio');
         $Depart = $request->input('Departamento');
+        $Prove  = $request->input('Proveedor');
         $Extenc = $request->file('UploadMe')->getClientOriginalExtension();    
         $FileNa = time() . ' - ' .$request->file('UploadMe')->getClientOriginalName();    
         $NameCT = Categoria::where('CATEGO_ID', $request->input('Categorias'))->first()->DESCRIPCION;
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
         $SiZeMB = number_format($file->getSize() / 1048576, 2, '.', '');
-        $PathSt = $Unidad . '/'. $Depart . '/'. $NameCT . '/' . $FileNa;        
+
+
+        $Documentos = new Documentos();
+        $Documentos->TITULO         = strtoupper($Titulo);
+        $Documentos->DESCRIPCION    = $Descri;
+        $Documentos->SKU            = $SKUDoc;
+        $Documentos->PROVEEDOR      = $Prove;
+        $Documentos->UNIDAD_NEGOCIO = $Unidad;
+        $Documentos->DEPARTAMENTO   = $Depart;
+        $Documentos->DEPA_ID        = $Departa_asign;        
+        $Documentos->ACTIVO         = 'S';
+        $Documentos->created_by     = $NameUS;
+        $Documentos->user_id        = $UserID;
+        $Documentos->save();
+
+        $DocID = $Documentos->DOCUMENTO;       
+        $LOCALPATH = "REF" . str_pad($DocID, 12, '0', STR_PAD_LEFT);
+        $PathSt = $Unidad . '/'. $Depart . '/'. $LOCALPATH. '/' . $NameCT . '/' . $FileNa;   
         $Minio = Storage::disk('s3')->put($PathSt, file_get_contents($file), 'public');
+
+        $Documentos->REF = $LOCALPATH;
+        $Documentos->save();
         
         if($Minio){
+            
             $Url = Storage::disk('s3')->url($PathSt);
 
-            $Documentos = new Documentos();
-            $Documentos->TITULO         = strtoupper($Titulo);
-            $Documentos->DESCRIPCION    = $Descri;
-            $Documentos->FECHA_VENCI    = date('Y-m-d', strtotime($Expira));
-            $Documentos->UNIDAD_NEGOCIO = $Unidad;
-            $Documentos->DEPARTAMENTO   = $Depart;
-            $Documentos->DEPA_ID        = $Departa_asign;
-            $Documentos->CATEGORIA      = $NameCT;
-            $Documentos->ACTIVO         = 'S';
-            $Documentos->created_by     = $NameUS;
-            $Documentos->user_id        = $UserID;
-            $Documentos->save();
-
-            $DocID = $Documentos->DOCUMENTO;
+            
 
             $Adjunto = new Adjuntos();
             $Adjunto->DOC_ID         = $DocID;
@@ -200,6 +247,7 @@ class DocumentosController extends Controller
             $Adjunto->DOCUMENT_NAME  = $FileNa;
             $Adjunto->created_by     = $NameUS;
             $Adjunto->user_id        = $UserID;
+            $Adjunto->CATEGORIA      = $NameCT;
             $Adjunto->save();
 
 
@@ -240,9 +288,12 @@ class DocumentosController extends Controller
 
         $Unidad = $Documento->UNIDAD_NEGOCIO;
         $Depart = $Documento->DEPARTAMENTO;
-        $Catego = $Documento->CATEGORIA;
+        $Catego = $request->input('cat_doc');
+        $REF    = $Documento->REF;
         $NameDC  = time() . ' - ' . $request->file('file')->getClientOriginalName();
-        $PathSt = $Unidad . '/' . $Depart . '/'. $Catego . '/' . $NameDC;
+
+        $PathSt = $Unidad . '/' . $Depart . '/'. $REF . '/' . $Catego . '/' . $NameDC;
+
         $NameUS = Auth::user()->email;
         $UserID = Auth::user()->id;
         $Extenc = $file->getClientOriginalExtension();
@@ -255,12 +306,13 @@ class DocumentosController extends Controller
 
             $Adjunto = new Adjuntos();
             $Adjunto->DOC_ID = $id;
-            $Adjunto->STORAGE_PATH = $PathSt;
+            $Adjunto->STORAGE_PATH  = $PathSt;
             $Adjunto->DOCUMENT_TYPE = $Extenc;
             $Adjunto->DOCUMENT_SIZE = $SiZeMB;
             $Adjunto->DOCUMENT_NAME = $NameDC;
-            $Adjunto->created_by = $NameUS;
-            $Adjunto->user_id = $UserID;
+            $Adjunto->CATEGORIA     = $Catego;
+            $Adjunto->created_by    = $NameUS;
+            $Adjunto->user_id       = $UserID;
             $Adjunto->save();
 
             return response()->json(['status' => 'ok', 'message' => 'Archivo subido correctamente', 'path' => $Url], 200);

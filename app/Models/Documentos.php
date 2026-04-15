@@ -10,9 +10,13 @@ class Documentos extends Model {
     protected $table = "documento";
     protected $primaryKey = "DOCUMENTO";
 
-    public function Archivos()
+    public function RegCertificados()
     {
-        return $this->hasMany(Adjuntos::class, 'DOC_ID', 'DOCUMENTO');
+        return $this->hasMany(Adjuntos::class, 'DOC_ID', 'DOCUMENTO')->where('CATEGORIA', 'CERTIFICADOS');
+    }
+    public function RegDossiers()
+    {
+        return $this->hasMany(Adjuntos::class, 'DOC_ID', 'DOCUMENTO')->where('CATEGORIA', 'DOSSIERS');
     }
 
     public static function getMetricas()
